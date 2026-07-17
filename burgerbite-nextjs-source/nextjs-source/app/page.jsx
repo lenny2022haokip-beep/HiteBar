@@ -99,9 +99,9 @@ ${itemLines}
         {/* Full-width hero image */}
         <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] min-h-[420px] max-h-[680px] overflow-hidden">
           <img
-            src="/pinterest_burger.jpg"
-            alt="Juicy steaming cheeseburger with bacon and fresh ingredients"
-            className="w-full h-full object-cover object-center scale-105 hover:scale-100 transition-transform duration-[2000ms] ease-out"
+            src="/showcase_burger.jpg"
+            alt="Gourmet smash burger with fries on rustic wooden board"
+            className="w-full h-full object-cover object-[center_60%] scale-105 hover:scale-100 transition-transform duration-[2000ms] ease-out"
           />
           {/* Dark gradient overlays for text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/30 to-transparent z-10" />
