@@ -1,12 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Script from "next/script";
 
 export default function Hero({ onExploreClick }) {
   return (
     <section className="relative overflow-hidden">
+      <Script
+        type="module"
+        src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+        strategy="afterInteractive"
+      />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-6 sm:pt-16">
-        {/* Spline 3D asset placeholder */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -14,23 +19,21 @@ export default function Hero({ onExploreClick }) {
           className="relative w-full aspect-[4/3] sm:aspect-[16/9] rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-[#1A1A1A] to-[#0D0D0D]"
         >
           {/*
-            Swap the src below for your real Spline scene export, e.g.:
-            https://my.spline.design/YOUR-SCENE-ID/
-            Spline scenes are exported per-project from https://spline.design —
-            this URL is a placeholder until the real asset is ready.
+            Placeholder 3D asset: a generated stylized burger (/models/burgerbite-placeholder.glb).
+            To swap in a real Spline scene instead, replace this <model-viewer> block with:
+            <iframe src="https://my.spline.design/YOUR-SCENE-ID/" ... />
           */}
-          <iframe
-            src="https://my.spline.design/PLACEHOLDER-SCENE/"
-            title="BurgerBite 3D hero asset"
-            frameBorder="0"
-            className="absolute inset-0 w-full h-full"
-            loading="lazy"
+          {/* @ts-ignore -- model-viewer is a web component, not a typed React element */}
+          <model-viewer
+            src="/models/burgerbite-placeholder.glb"
+            alt="A 3D model of a BurgerBite burger"
+            auto-rotate
+            camera-controls
+            disable-zoom
+            shadow-intensity="1"
+            exposure="1.1"
+            style={{ width: "100%", height: "100%", "--poster-color": "transparent" }}
           />
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none bg-[#121212]/10">
-            <span className="text-xs uppercase tracking-widest text-[#F5EFE6]/30 font-display">
-              3D asset loads here
-            </span>
-          </div>
         </motion.div>
 
         <motion.div
