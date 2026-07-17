@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BurgerBite — Order Direct &amp; Save 10%</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #121212;
+    --card: #1A1A1A;
+    --card2: #1E1E1E;
+    --accent: #FF6B00;
+    --cream: #F5EFE6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 999px; }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(18,18,18,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .header-inner {
+    max-width: 1100px; margin: 0 auto; padding: 0 20px;
+    height: 64px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { font-weight: 800; font-size: 20px; letter-spacing: -0.02em; }
+  .logo span { color: var(--accent); }
+  nav.desktop-nav { display: flex; gap: 32px; }
+  nav.desktop-nav a, nav.desktop-nav button {
+    background: none; border: none; cursor: pointer;
+    color: rgba(245,239,230,0.7); font-size: 14px; font-weight: 500;
+    font-family: 'Inter', sans-serif; text-decoration: none;
+  }
+  nav.desktop-nav a:hover, nav.desktop-nav button:hover { color: var(--accent); }
+  @media (max-width: 640px) { nav.desktop-nav { display: none; } }
+
+  .cart-btn {
+    position: relative; width: 44px; height: 44px; border-radius: 999px;
+    background: var(--card2); border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .cart-btn:hover { background: #2A2A2A; }
+  .cart-btn:active { transform: scale(0.95); }
+  .cart-badge {
+    position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px;
+    padding: 0 4px; border-radius: 999px; background: var(--accent); color: var(--bg);
+    font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero-wrap { max-width: 1100px; margin: 0 auto; padding: 40px 20px 24px; }
+  .spline-box {
+    position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 24px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(155deg, #1A1A1A, #0D0D0D);
+    display: flex; align-items: center; justify-content: center;
+    animation: fadeUp 0.7s ease both;
+  }
+  @media (max-width: 640px) { .spline-box { aspect-ratio: 4/3; } }
+  .spline-box span { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,239,230,0.3); }
+  .hero-text { margin-top: 40px; text-align: center; max-width: 640px; margin-left: auto; margin-right: auto;
+    animation: fadeUp 0.7s ease 0.15s both; }
+  .hero-text h1 { font-size: 44px; line-height: 1.05; font-weight: 800; margin: 0; letter-spacing: -0.02em; }
+  @media (max-width: 640px) { .hero-text h1 { font-size: 32px; } }
+  .hero-text h1 .accent { color: var(--accent); }
+  .hero-text p { margin: 20px 0 0; color: rgba(245,239,230,0.6); font-size: 17px; }
+  .cta-btn {
+    margin-top: 32px; display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: var(--bg); font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700; padding: 16px 32px; border-radius: 999px; border: none; font-size: 16px;
+    cursor: pointer; transition: transform 0.15s, filter 0.15s;
+    box-shadow: 0 8px 30px rgba(255,107,0,0.35);
+  }
+  .cta-btn:hover { filter: brightness(1.1); }
+  .cta-btn:active { transform: scale(0.95); }
+  .grill-divider {
+    height: 6px; opacity: 0.5;
+    background-image: repeating-linear-gradient(90deg, var(--accent) 0px, var(--accent) 18px, transparent 18px, transparent 34px);
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ---------- Why Order Direct ---------- */
+  .why-section { max-width: 1100px; margin: 0 auto; padding: 64px 20px; }
+  .why-head { text-align: center; margin-bottom: 40px; }
+  .why-tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .why-head h2 { font-size: 28px; font-weight: 800; margin: 0; }
+  @media (min-width: 640px) { .why-head h2 { font-size: 34px; } }
+  .why-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 640px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
+  .why-card {
+    background: var(--card); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 24px;
+    opacity: 0; transform: translateY(16px); animation: fadeUp 0.5s ease forwards;
+  }
+  .why-card:nth-child(2) { animation-delay: 0.1s; }
+  .why-card:nth-child(3) { animation-delay: 0.2s; }
+  .why-card h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 17px; margin: 0 0 8px; }
+  .why-card p { font-size: 14px; color: rgba(245,239,230,0.6); line-height: 1.6; margin: 0; }
+
+  /* ---------- Menu Section ---------- */
+  .menu-section { max-width: 1100px; margin: 0 auto; padding: 48px 20px 64px; scroll-margin-top: 64px; }
+  .menu-section h2 { text-align: center; font-size: 28px; font-weight: 800; margin: 0 0 24px; }
+  @media (min-width: 640px) { .menu-section h2 { font-size: 34px; } }
+  .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 32px; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  @media (min-width: 640px) { .tabs { justify-content: center; } }
+  .tab-btn {
+    white-space: nowrap; padding: 10px 20px; border-radius: 999px; font-size: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.1); background: transparent; color: rgba(245,239,230,0.6);
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { border-color: rgba(255,107,0,0.5); color: var(--cream); }
+  .tab-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+  .item-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 640px) { .item-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .item-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .menu-card {
+    background: var(--card); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; overflow: hidden;
+    display: flex; flex-direction: column; transition: transform 0.2s;
+    animation: fadeUp 0.3s ease both;
+  }
+  .menu-card:hover { transform: scale(1.02); }
+  .menu-card:active { transform: scale(0.98); }
+  .card-art { aspect-ratio: 4/3; position: relative; padding: 16px; display: flex; align-items: flex-end; }
+  .card-art .ring { position: absolute; top: -24px; right: -24px; width: 96px; height: 96px; border-radius: 999px; opacity: 0.4; }
+  .card-art .cat-label { position: absolute; top: 16px; left: 16px; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+  .card-art .item-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 17px; line-height: 1.3; color: rgba(245,239,230,0.9); position: relative; z-index: 1; }
+  .card-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+  .card-body h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 15px; margin: 0; line-height: 1.35; }
+  .card-body .desc { font-size: 12px; color: rgba(245,239,230,0.5); margin: 6px 0 0; line-height: 1.55; flex: 1; }
+  .card-footer { margin-top: 16px; display: flex; align-items: center; justify-content: space-between; }
+  .price { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--accent); font-size: 17px; }
+  .price .approx { margin-left: 4px; font-size: 10px; color: rgba(245,239,230,0.3); font-weight: 400; font-family: 'Inter', sans-serif; }
+  .add-btn {
+    padding: 8px 16px; border-radius: 999px; background: var(--accent); color: var(--bg); border: none;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer;
+    transition: transform 0.15s, filter 0.15s;
+  }
+  .add-btn:hover { filter: brightness(1.1); }
+  .add-btn:active { transform: scale(0.95); }
+  .qty-stepper {
+    display: flex; align-items: center; gap: 10px; background: var(--bg);
+    border-radius: 999px; padding: 4px; border: 1px solid rgba(255,255,255,0.1);
+  }
+  .qty-stepper button {
+    width: 26px; height: 26px; border-radius: 999px; border: none; background: transparent;
+    color: var(--accent); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .qty-stepper button:hover { background: rgba(255,255,255,0.05); }
+  .qty-stepper button:active { transform: scale(0.9); }
+  .qty-stepper span { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 14px; width: 16px; text-align: center; }
+
+  /* ---------- Footer ---------- */
+  footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 32px 20px; text-align: center; }
+  footer p { margin: 0; font-size: 12px; color: rgba(245,239,230,0.3); }
+  footer p.brand { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: rgba(245,239,230,0.6); margin-bottom: 4px; }
+
+  /* ---------- Cart Drawer ---------- */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 50;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s;
+  }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; right: 0; height: 100%; width: 100%; max-width: 420px;
+    background: #161616; z-index: 51; display: flex; flex-direction: column;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.4);
+    transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .drawer.open { transform: translateX(0); }
+  .drawer-header {
+    display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.05); flex-shrink: 0;
+  }
+  .drawer-header h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 18px; margin: 0; }
+  .close-btn {
+    width: 36px; height: 36px; border-radius: 999px; border: none; background: none; cursor: pointer;
+    color: var(--cream); display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+  }
+  .close-btn:hover { background: rgba(255,255,255,0.05); }
+  .drawer-body { flex: 1; overflow-y: auto; padding: 16px 20px; }
+  .empty-cart { text-align: center; margin-top: 40px; font-size: 14px; color: rgba(245,239,230,0.4); }
+  .cart-line {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    background: var(--card2); border-radius: 12px; padding: 12px; margin-bottom: 12px;
+  }
+  .cart-line .info { flex: 1; min-width: 0; }
+  .cart-line .info p.name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 14px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cart-line .info p.each { font-size: 12px; color: rgba(245,239,230,0.4); margin: 2px 0 0; }
+  .cart-line .line-total { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 14px; width: 64px; text-align: right; flex-shrink: 0; }
+
+  .form-section { margin-top: 24px; }
+  .form-section h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 14px; color: rgba(245,239,230,0.7); margin: 0 0 12px; }
+  .field { margin-bottom: 12px; }
+  .field input, .field textarea {
+    width: 100%; background: var(--card2); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+    padding: 12px 16px; font-size: 14px; color: var(--cream); font-family: 'Inter', sans-serif;
+    outline: none; transition: border 0.15s;
+  }
+  .field input::placeholder, .field textarea::placeholder { color: rgba(245,239,230,0.3); }
+  .field input:focus, .field textarea:focus { border-color: var(--accent); }
+  .field textarea { resize: none; }
+  .error-text { font-size: 12px; color: #f87171; margin: 4px 0 0; }
+
+  .drawer-footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 16px 20px; flex-shrink: 0; }
+  .sum-row { display: flex; justify-content: space-between; font-size: 14px; color: rgba(245,239,230,0.6); margin-bottom: 8px; }
+  .sum-row.total { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: var(--cream); padding-top: 4px; }
+  .sum-row.total .amt { color: var(--accent); }
+  .whatsapp-btn {
+    width: 100%; margin-top: 12px; background: #25D366; color: #0B1A0F; border: none;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; padding: 16px; border-radius: 999px;
+    display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; font-size: 15px;
+    transition: transform 0.15s, filter 0.15s;
+  }
+  .whatsapp-btn:hover { filter: brightness(1.05); }
+  .whatsapp-btn:active { transform: scale(0.97); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="logo font-display">Burger<span>Bite</span></span>
+    <nav class="desktop-nav">
+      <button onclick="scrollToMenu()">Menu</button>
+      <a href="#why-direct">Why Order Direct</a>
+    </nav>
+    <button class="cart-btn" onclick="openCart()" aria-label="Open cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      </svg>
+      <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero-wrap">
+  <div class="spline-box">
+    <iframe src="https://my.spline.design/PLACEHOLDER-SCENE/" title="BurgerBite 3D hero asset" frameborder="0"
+      style="position:absolute; inset:0; width:100%; height:100%;" loading="lazy"></iframe>
+    <span style="position:relative; z-index:1; background:rgba(18,18,18,0.4); padding:6px 12px; border-radius:8px;">3D asset loads here</span>
+  </div>
+  <div class="hero-text">
+    <h1 class="font-display">Craving a BurgerBite?<br/><span class="accent">Order Direct &amp; Save 10%.</span></h1>
+    <p>Handmade burgers, rolls &amp; shawarma — straight from our grill to your door.</p>
+    <button class="cta-btn" onclick="scrollToMenu()">
+      Explore Menu
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+    </button>
+  </div>
+</section>
+<div class="grill-divider"></div>
+
+<section class="why-section" id="why-direct">
+  <div class="why-head">
+    <span class="why-tag">Why order direct</span>
+    <h2 class="font-display">Skip the app. Get more for less.</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <h3>Save 10% instantly</h3>
+      <p>No app markup. Ordering direct means the discount goes straight to you, not a delivery platform.</p>
+    </div>
+    <div class="why-card">
+      <h3>Arrives hotter</h3>
+      <p>Your order goes straight from our kitchen to the rider — no extra pickup queue at a dark store.</p>
+    </div>
+    <div class="why-card">
+      <h3>Supports our kitchen</h3>
+      <p>Third-party apps take a big cut per order. Ordering direct keeps more in the business that makes your food.</p>
+    </div>
+  </div>
+</section>
+
+<section class="menu-section" id="menu">
+  <h2 class="font-display">Our Menu</h2>
+  <div class="tabs" id="tabs"></div>
+  <div class="item-grid" id="item-grid"></div>
+</section>
+
+<footer>
+  <p class="brand font-display">BurgerBite</p>
+  <p>Order direct. Save more. Eat hotter.</p>
+</footer>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-header">
+    <h2>Your Order</h2>
+    <button class="close-btn" onclick="closeCart()" aria-label="Close cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5EFE6" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body">
+    <div id="cart-lines"></div>
+    <div class="form-section">
+      <h3>Delivery Details</h3>
+      <div class="field">
+        <input type="text" id="cust-name" placeholder="Full name" oninput="renderCart()" />
+        <p class="error-text" id="err-name" style="display:none;"></p>
+      </div>
+      <div class="field">
+        <input type="tel" id="cust-phone" placeholder="Phone number" oninput="renderCart()" />
+        <p class="error-text" id="err-phone" style="display:none;"></p>
+      </div>
+      <div class="field">
+        <textarea id="cust-address" rows="3" placeholder="Full delivery address" oninput="renderCart()"></textarea>
+        <p class="error-text" id="err-address" style="display:none;"></p>
+      </div>
+      <p class="error-text" id="err-cart" style="display:none;"></p>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <div class="sum-row"><span>Subtotal</span><span id="sum-subtotal">₹0</span></div>
+    <div class="sum-row"><span>Delivery Fee</span><span id="sum-delivery">₹0</span></div>
+    <div class="sum-row total"><span>Total</span><span class="amt" id="sum-total">₹0</span></div>
+    <button class="whatsapp-btn" onclick="sendOrder()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-1.5-.7-2.5-1.3-3.5-3-.3-.4.3-.4.7-1.3.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3.1 4.9 4.3 2.2.9 2.7.7 3.2.7.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/>
+        <path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.1c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3C4 14.9 3.5 13.5 3.5 12c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.5-8.5 8.5z"/>
+      </svg>
+      Confirm Order via WhatsApp
+    </button>
+  </div>
+</aside>
+
+<script>
+const STORE_WHATSAPP = "919673483659";
+const DELIVERY_FEE = 50;
+
+const menuData = [
+  { id: "b1", name: "Veg Burger", description: "Crisp veg patty, lettuce & house sauce in a soft bun.", price: 80, category: "Burgers" },
+  { id: "b2", name: "Veg Burger with Cheese", description: "Our veg burger, loaded with melted cheese.", price: 100, category: "Burgers" },
+  { id: "b3", name: "Double Patty (Veg)", description: "Two veg patties stacked high for serious hunger.", price: 120, category: "Burgers" },
+  { id: "b4", name: "Paneer Burger", description: "Grilled paneer steak, fresh veggies, soft bun.", price: 120, category: "Burgers" },
+  { id: "b5", name: "Paneer Burger with Cheese", description: "Paneer burger topped with a generous layer of cheese.", price: 140, category: "Burgers" },
+  { id: "b6", name: "Egg Burger", description: "Fried egg, fresh greens & house mayo in a toasted bun.", price: 80, category: "Burgers" },
+  { id: "b7", name: "Egg Burger with Cheese", description: "Our classic egg burger with melted cheese.", price: 100, category: "Burgers" },
+  { id: "b8", name: "Chicken Burger", description: "Juicy chicken patty, crisp lettuce & signature sauce.", price: 120, category: "Burgers" },
+  { id: "b9", name: "Chicken Grilled Burger", description: "Flame-grilled chicken breast, smoky & tender.", price: 160, category: "Burgers" },
+  { id: "b10", name: "Chicken Steak Burger", description: "Hand-pressed chicken steak patty, thick & hearty.", price: 120, category: "Burgers" },
+  { id: "b11", name: "Chicken Crispy Burger", description: "Golden crispy fried chicken fillet, crunch in every bite.", price: 120, category: "Burgers" },
+  { id: "b12", name: "Fish Burger", description: "Crispy fried fish fillet with tartar-style house sauce.", price: 180, category: "Burgers" },
+  { id: "b13", name: "Fish Double Patty", description: "Double the fish fillet, double the crunch.", price: 240, category: "Burgers" },
+  { id: "b14", name: "Mutton Burger", description: "Rich, spiced mutton patty grilled to order.", price: 200, category: "Burgers" },
+  { id: "b15", name: "Hite Burger", description: "Our signature house-special burger, loaded & stacked.", price: 120, category: "Burgers" },
+  { id: "r1", name: "Paneer Roll", description: "Grilled paneer wrapped in soft khabus bread.", price: 120, category: "Rolls & Shawarma" },
+  { id: "r2", name: "Paneer Tikka Roll", description: "Smoky tandoor-spiced paneer tikka in a warm roll.", price: 120, category: "Rolls & Shawarma" },
+  { id: "r3", name: "Paneer Barbeque Sauce Roll", description: "Paneer roll finished with a smoky barbeque glaze.", price: 130, category: "Rolls & Shawarma" },
+  { id: "r4", name: "Paneer Garlic Spicy Roll", description: "Bold garlic-chilli paneer, rolled up hot.", price: 120, category: "Rolls & Shawarma" },
+  { id: "r5", name: "Paneer Peri Peri Roll", description: "Peri-peri spiced paneer with fresh veg crunch.", price: 110, category: "Rolls & Shawarma" },
+  { id: "r6", name: "Falafel Roll", description: "Crisp falafel, fresh salad & tahini-style sauce.", price: 100, category: "Rolls & Shawarma" },
+  { id: "r7", name: "Egg Roll", description: "Fluffy egg rolled with onions & house masala.", price: 80, category: "Rolls & Shawarma" },
+  { id: "r8", name: "Chicken Mayonnaise Roll", description: "Shredded chicken tossed in creamy mayonnaise.", price: 120, category: "Rolls & Shawarma" },
+  { id: "r9", name: "Chicken Tikka Masala Roll", description: "Char-grilled chicken tikka in a rich masala roll.", price: 150, category: "Rolls & Shawarma" },
+  { id: "r10", name: "Chicken Keema Roll", description: "Spiced minced chicken keema, rolled fresh.", price: 150, category: "Rolls & Shawarma" },
+  { id: "r11", name: "Chicken Roll", description: "Our classic chicken roll — simple, spiced, satisfying.", price: 120, category: "Rolls & Shawarma" },
+  { id: "r12", name: "Chicken Kati Roll", description: "Skewer-grilled chicken kati style, wrapped hot.", price: 150, category: "Rolls & Shawarma" },
+  { id: "r13", name: "Chicken Hot Dog", description: "Grilled chicken sausage, mustard & house sauce.", price: 150, category: "Rolls & Shawarma" },
+  { id: "r14", name: "Chicken Shawarma", description: "Slow-roasted chicken shawarma, garlic sauce & pickles.", price: 100, category: "Rolls & Shawarma" },
+  { id: "r15", name: "Chicken Shawarma with Barbeque Sauce", description: "Our chicken shawarma finished with smoky BBQ sauce.", price: 110, category: "Rolls & Shawarma" },
+  { id: "r16", name: "Spicy Chicken Shawarma", description: "Extra hot spice rub, for the heat-seekers.", price: 140, category: "Rolls & Shawarma" },
+  { id: "r17", name: "Peri Peri Shawarma", description: "Tangy peri-peri marinated chicken shawarma.", price: 140, category: "Rolls & Shawarma" },
+  { id: "s1", name: "Falafel (Starter)", description: "Crisp-fried chickpea falafel, served warm.", price: 130, category: "Sides & Fries" },
+  { id: "s2", name: "Veg Cutlet", description: "Golden-fried vegetable cutlets, lightly spiced.", price: 50, category: "Sides & Fries" },
+  { id: "s3", name: "Chicken Cutlet", description: "Crumbed & fried chicken cutlets, crunchy outside.", price: 60, category: "Sides & Fries" },
+  { id: "s4", name: "Hite Cutlet", description: "House-special cutlet blend, fried to order.", price: 60, category: "Sides & Fries" },
+  { id: "s5", name: "Grilled Chicken Cutlet", description: "Chicken cutlet, char-grilled instead of fried.", price: 70, category: "Sides & Fries" },
+  { id: "s6", name: "French Fries", description: "Classic golden fries, salted just right.", price: 80, category: "Sides & Fries" },
+  { id: "s7", name: "French Fries with Cheese", description: "Our fries loaded with melted cheese.", price: 100, category: "Sides & Fries" },
+  { id: "s8", name: "French Fries with Peri Peri Masala", description: "Fries tossed in tangy peri-peri masala.", price: 100, category: "Sides & Fries" },
+  { id: "s9", name: "French Fries with Garlic Cheese", description: "Fries topped with garlic butter and cheese.", price: 120, category: "Sides & Fries" },
+  { id: "s10", name: "Fish & Chips", description: "Crispy fried fish fillet with a side of fries.", price: 200, category: "Sides & Fries" },
+  { id: "s11", name: "Plain Cheese Pizza", description: "Simple, cheesy, straight out of the oven.", price: 150, category: "Sides & Fries" },
+  { id: "s12", name: "Chicken Shawarma Pizza", description: "Shawarma-spiced chicken over a cheesy pizza base.", price: 200, category: "Sides & Fries" },
+  { id: "s13", name: "Chicken Pizza", description: "Loaded with grilled chicken & melted cheese.", price: 200, category: "Sides & Fries" },
+  { id: "s14", name: "Veg Pizza / Grilled Sandwich", description: "Fresh veggies over cheese, pizza or sandwich style.", price: 170, category: "Sides & Fries" },
+  { id: "d1", name: "Cold Drink (200ml)", description: "Chilled soft drink, served ice-cold.", price: 40, category: "Drinks & Desserts", verify: true },
+  { id: "d2", name: "Cold Blue", description: "House blue mocktail, fruity & refreshing.", price: 90, category: "Drinks & Desserts", verify: true },
+  { id: "d3", name: "Mint Mojito", description: "Fresh mint & lime mojito, non-alcoholic.", price: 90, category: "Drinks & Desserts", verify: true },
+  { id: "d4", name: "Mango Milk", description: "Creamy chilled mango milk.", price: 90, category: "Drinks & Desserts", verify: true },
+  { id: "d5", name: "Shake", description: "Thick, creamy milkshake — ask for today's flavour.", price: 100, category: "Drinks & Desserts", verify: true },
+  { id: "d6", name: "Cold Coffee", description: "Chilled, frothy cold coffee.", price: 120, category: "Drinks & Desserts", verify: true },
+  { id: "d7", name: "Caramel Custard", description: "Silky caramel custard, chilled and set.", price: 100, category: "Drinks & Desserts", verify: true },
+  { id: "d8", name: "Chocolate Mousse", description: "Rich, airy chocolate mousse.", price: 120, category: "Drinks & Desserts", verify: true }
+];
+
+const categories = ["Burgers", "Rolls & Shawarma", "Sides & Fries", "Drinks & Desserts"];
+const categoryAccents = {
+  "Burgers": "#FF6B00",
+  "Rolls & Shawarma": "#E07A3F",
+  "Sides & Fries": "#C68C3C",
+  "Drinks & Desserts": "#789682"
+};
+
+let activeCategory = categories[0];
+let cart = {};
+
+function formatINR(n) { return n.toLocaleString("en-IN"); }
+
+function renderTabs() {
+  const tabsEl = document.getElementById("tabs");
+  tabsEl.innerHTML = categories.map(cat =>
+    `<button class="tab-btn ${cat === activeCategory ? 'active' : ''}" onclick="setCategory('${cat}')">${cat}</button>`
+  ).join("");
+}
+
+function setCategory(cat) {
+  activeCategory = cat;
+  renderTabs();
+  renderGrid();
+}
+
+function cardArt(item) {
+  const accent = categoryAccents[item.category] || "#FF6B00";
+  return `
+    <div class="card-art" style="background: linear-gradient(155deg, #1A1A1A 0%, #141414 55%, ${accent}22 100%);">
+      <div class="ring" style="border: 3px solid ${accent};"></div>
+      <span class="cat-label" style="color:${accent};">${item.category}</span>
+      <span class="item-name">${item.name}</span>
+    </div>`;
+}
+
+function renderGrid() {
+  const grid = document.getElementById("item-grid");
+  const items = menuData.filter(m => m.category === activeCategory);
+  grid.innerHTML = items.map(item => {
+    const qty = cart[item.id] || 0;
+    return `
+    <div class="menu-card">
+      ${cardArt(item)}
+      <div class="card-body">
+        <h3>${item.name}</h3>
+        <p class="desc">${item.description}</p>
+        <div class="card-footer">
+          <span class="price">₹${formatINR(item.price)}${item.verify ? '<span class="approx">approx.</span>' : ''}</span>
+          <div id="ctrl-${item.id}">
+            ${qty === 0
+              ? `<button class="add-btn" onclick="updateQty('${item.id}', 1)">Add</button>`
+              : `<div class="qty-stepper">
+                  <button onclick="updateQty('${item.id}', -1)" aria-label="Remove one">−</button>
+                  <span>${qty}</span>
+                  <button onclick="updateQty('${item.id}', 1)" aria-label="Add one more">+</button>
+                 </div>`
+            }
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function updateQty(id, delta) {
+  const newQty = (cart[id] || 0) + delta;
+  if (newQty <= 0) delete cart[id]; else cart[id] = newQty;
+  renderGrid();
+  renderCart();
+  updateBadge();
+}
+
+function updateBadge() {
+  const count = Object.values(cart).reduce((a, b) => a + b, 0);
+  const badge = document.getElementById("cart-badge");
+  if (count > 0) {
+    badge.style.display = "flex";
+    badge.textContent = count;
+  } else {
+    badge.style.display = "none";
+  }
+}
+
+function getCartItems() {
+  return Object.entries(cart).filter(([, q]) => q > 0)
+    .map(([id, q]) => ({ ...menuData.find(m => m.id === id), qty: q }));
+}
+
+function renderCart() {
+  const items = getCartItems();
+  const linesEl = document.getElementById("cart-lines");
+  if (items.length === 0) {
+    linesEl.innerHTML = `<p class="empty-cart">Your cart is empty — add something tasty from the menu.</p>`;
+  } else {
+    linesEl.innerHTML = items.map(item => `
+      <div class="cart-line">
+        <div class="info">
+          <p class="name">${item.name}</p>
+          <p class="each">₹${formatINR(item.price)} each</p>
+        </div>
+        <div class="qty-stepper">
+          <button onclick="updateQty('${item.id}', -1)">−</button>
+          <span>${item.qty}</span>
+          <button onclick="updateQty('${item.id}', 1)">+</button>
+        </div>
+        <span class="line-total">₹${formatINR(item.qty * item.price)}</span>
+      </div>
+    `).join("");
+  }
+  const subtotal = items.reduce((s, i) => s + i.qty * i.price, 0);
+  const total = items.length > 0 ? subtotal + DELIVERY_FEE : 0;
+  document.getElementById("sum-subtotal").textContent = "₹" + formatINR(subtotal);
+  document.getElementById("sum-delivery").textContent = "₹" + formatINR(items.length > 0 ? DELIVERY_FEE : 0);
+  document.getElementById("sum-total").textContent = "₹" + formatINR(total);
+}
+
+function openCart() {
+  document.getElementById("overlay").classList.add("open");
+  document.getElementById("drawer").classList.add("open");
+  renderCart();
+}
+function closeCart() {
+  document.getElementById("overlay").classList.remove("open");
+  document.getElementById("drawer").classList.remove("open");
+}
+
+function scrollToMenu() {
+  document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
+}
+
+function showError(id, msg) {
+  const el = document.getElementById(id);
+  if (msg) { el.textContent = msg; el.style.display = "block"; }
+  else { el.style.display = "none"; }
+}
+
+function sendOrder() {
+  const name = document.getElementById("cust-name").value.trim();
+  const phone = document.getElementById("cust-phone").value.trim();
+  const address = document.getElementById("cust-address").value.trim();
+  const items = getCartItems();
+
+  let valid = true;
+  showError("err-name", name ? "" : (valid = false, "Enter your name"));
+  showError("err-phone", (phone.length >= 8) ? "" : (valid = false, "Enter a valid phone number"));
+  showError("err-address", address ? "" : (valid = false, "Enter your delivery address"));
+  showError("err-cart", items.length > 0 ? "" : (valid = false, "Your cart is empty"));
+  if (!valid) return;
+
+  const subtotal = items.reduce((s, i) => s + i.qty * i.price, 0);
+  const total = subtotal + DELIVERY_FEE;
+  const itemLines = items.map(i => `- ${i.qty}x ${i.name} (₹${formatINR(i.qty * i.price)})`).join("\n");
+
+  const message = `🍔 *NEW BURGERBITE DIRECT ORDER!* 🍦
+----------------------------------
+*Customer:* ${name}
+*Phone:* ${phone}
+*Delivery Address:* ${address}
+
+*Order Items:*
+${itemLines}
+
+----------------------------------
+*Subtotal:* ₹${formatINR(subtotal)}
+*Delivery Fee:* ₹${DELIVERY_FEE}
+*Total Amount:* ₹${formatINR(total)}
+----------------------------------
+⚡ *Please confirm this order and share the payment link!*`;
+
+  const encoded = encodeURIComponent(message);
+  window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encoded}`, "_blank");
+}
+
+renderTabs();
+renderGrid();
+renderCart();
+</script>
+</body>
+</html>
