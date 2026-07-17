@@ -19,16 +19,16 @@ const points = [
 
 export default function WhyOrderDirect() {
   return (
-    <section id="why-direct" className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-      <div className="text-center mb-10">
-        <span className="inline-block text-xs font-display font-700 tracking-widest uppercase text-[#FF6B00] mb-3">
+    <section id="why-direct" className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20 border-t-2 border-white/5">
+      <div className="text-center mb-12">
+        <span className="inline-block text-xs font-display font-800 tracking-widest uppercase text-[#FF6B00] mb-3">
           Why order direct
         </span>
-        <h2 className="font-display font-800 text-2xl sm:text-4xl">
+        <h2 className="font-display font-800 text-2xl sm:text-4xl uppercase tracking-tight">
           Skip the app. Get more for less.
         </h2>
       </div>
-      <div className="grid sm:grid-cols-3 gap-4">
+      <div className="grid sm:grid-cols-3 gap-6">
         {points.map((p, i) => (
           <motion.div
             key={p.title}
@@ -36,10 +36,10 @@ export default function WhyOrderDirect() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="bg-[#1A1A1A] border border-white/5 rounded-2xl p-6"
+            className="bg-[#161616] border-2 border-white/5 hover:border-white/20 p-6 rounded-none transition-colors duration-300"
           >
-            <h3 className="font-display font-700 text-lg mb-2">{p.title}</h3>
-            <p className="text-sm text-[#F5EFE6]/60 leading-relaxed">{p.body}</p>
+            <h3 className="font-display font-800 text-base uppercase tracking-wider text-[#F5EFE6] mb-3">{p.title}</h3>
+            <p className="text-sm text-[#F5EFE6]/60 leading-relaxed font-sans">{p.body}</p>
           </motion.div>
         ))}
       </div>
