@@ -93,6 +93,33 @@ ${itemLines}
     <div className="min-h-screen bg-[#121212] text-[#F5EFE6] font-sans antialiased">
       <Header itemCount={itemCount} onCartClick={() => setIsCartOpen(true)} onMenuClick={scrollToMenu} />
       <Hero onExploreClick={scrollToMenu} />
+      
+      {/* Pinterest Banner Image Section */}
+      <section className="border-y-2 border-white/10 bg-[#0d0d0d] overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="relative border-2 border-white/10 rounded-none overflow-hidden aspect-[3/2]">
+              <img
+                src="https://i.pinimg.com/736x/6e/c6/ad/6ec6ad78626804f1a898c330be2e0685.jpg"
+                alt="Cheeseburger craft advertising photography"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="flex flex-col justify-center">
+              <span className="text-xs font-display font-800 tracking-widest uppercase text-[#FF6B00] mb-3">
+                Crafted to perfection
+              </span>
+              <h2 className="font-display font-800 text-3xl sm:text-4xl uppercase tracking-tighter mb-4 leading-tight">
+                Flame-grilled, fresh ingredients, pure flavor.
+              </h2>
+              <p className="text-sm text-[#F5EFE6]/60 leading-relaxed font-sans">
+                Every single patty is hand-pressed, seasoned with our signature spice rub, and grilled to order. We don't take shortcuts because you don't compromise on taste.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <WhyOrderDirect />
       <div ref={menuRef}>
         <MenuSection
