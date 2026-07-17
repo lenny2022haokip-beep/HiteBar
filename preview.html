@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>BurgerBite — Order Direct &amp; Save 10%</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
   :root {
     --bg: #121212;
@@ -256,9 +256,7 @@
 
 <section class="hero-wrap">
   <div class="spline-box">
-    <model-viewer src="burgerbite-placeholder.glb" alt="A 3D model of a BurgerBite burger"
-      auto-rotate camera-controls disable-zoom shadow-intensity="1" exposure="1.1"
-      style="width:100%; height:100%; --poster-color: transparent;"></model-viewer>
+    <canvas id="three-canvas" style="width:100%; height:100%; display:block; min-height: 320px;"></canvas>
   </div>
   <div class="hero-text">
     <h1 class="font-display">Craving a BurgerBite?<br/><span class="accent">Order Direct &amp; Save 10%.</span></h1>
@@ -582,6 +580,169 @@ ${itemLines}
 renderTabs();
 renderGrid();
 renderCart();
+
+// Three.js Procedural Burger setup
+(function() {
+  const canvas = document.getElementById("three-canvas");
+  if (!canvas) return;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+  camera.position.set(0, 0.4, 4.5);
+
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  // Lights
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambientLight);
+
+  const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
+  dirLight1.position.set(5, 8, 5);
+  dirLight1.castShadow = true;
+  scene.add(dirLight1);
+
+  const dirLight2 = new THREE.DirectionalLight(0xffa500, 0.4);
+  dirLight2.position.set(-5, -2, -5);
+  scene.add(dirLight2);
+
+  // Materials
+  const bunMaterial = new THREE.MeshStandardMaterial({ color: 0xd28d43, roughness: 0.6, metalness: 0.1 });
+  const pattyMaterial = new THREE.MeshStandardMaterial({ color: 0x3d2314, roughness: 0.8, metalness: 0.15 });
+  const cheeseMaterial = new THREE.MeshStandardMaterial({ color: 0xffcc00, roughness: 0.3, metalness: 0.05 });
+  const lettuceMaterial = new THREE.MeshStandardMaterial({ color: 0x559632, roughness: 0.8 });
+  const tomatoMaterial = new THREE.MeshStandardMaterial({ color: 0xd9381e, roughness: 0.2, metalness: 0.05 });
+  const seedMaterial = new THREE.MeshStandardMaterial({ color: 0xf5efe6, roughness: 0.5 });
+
+  const burgerGroup = new THREE.Group();
+  scene.add(burgerGroup);
+
+  // Top Bun
+  const bunTopGroup = new THREE.Group();
+  const bunTopGeo = new THREE.SphereGeometry(1.0, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2);
+  const bunTopMesh = new THREE.Mesh(bunTopGeo, bunMaterial);
+  bunTopMesh.scale.set(1.1, 0.6, 1.1);
+  bunTopMesh.castShadow = true;
+  bunTopGroup.add(bunTopMesh);
+
+  // Seeds
+  const seedGeo = new THREE.CylinderGeometry(0.015, 0.015, 0.06, 8);
+  seedGeo.rotateX(Math.PI / 2);
+  for (let i = 0; i < 40; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.random() * (Math.PI / 3.5);
+    const r = 1.0;
+    const x = r * Math.sin(phi) * Math.cos(theta);
+    const y = r * Math.cos(phi) * 0.6;
+    const z = r * Math.sin(phi) * Math.sin(theta);
+    const seed = new THREE.Mesh(seedGeo, seedMaterial);
+    seed.position.set(x * 1.05, y * 1.05, z * 1.05);
+    seed.lookAt(new THREE.Vector3(x * 2, y * 2, z * 2));
+    seed.rotateZ(Math.random() * Math.PI);
+    bunTopGroup.add(seed);
+  }
+  burgerGroup.add(bunTopGroup);
+
+  // Tomatoes
+  const tomatoGroup = new THREE.Group();
+  const sliceGeo = new THREE.CylinderGeometry(0.42, 0.42, 0.1, 24);
+  sliceGeo.rotateX(Math.PI / 2);
+  const slice1 = new THREE.Mesh(sliceGeo, tomatoMaterial);
+  slice1.position.set(-0.35, 0, 0.1);
+  slice1.rotation.set(0.1, 0.2, 0.4);
+  slice1.castShadow = true;
+  tomatoGroup.add(slice1);
+  const slice2 = new THREE.Mesh(sliceGeo, tomatoMaterial);
+  slice2.position.set(0.35, 0, -0.1);
+  slice2.rotation.set(-0.15, -0.1, -0.2);
+  slice2.castShadow = true;
+  tomatoGroup.add(slice2);
+  burgerGroup.add(tomatoGroup);
+
+  // Cheese
+  const cheeseGroup = new THREE.Group();
+  const cheeseGeo = new THREE.BoxGeometry(1.6, 0.04, 1.6);
+  const cheeseMesh = new THREE.Mesh(cheeseGeo, cheeseMaterial);
+  cheeseMesh.rotation.y = Math.PI / 6;
+  cheeseMesh.castShadow = true;
+  cheeseGroup.add(cheeseMesh);
+  burgerGroup.add(cheeseGroup);
+
+  // Patty
+  const pattyGroup = new THREE.Group();
+  const pattyGeo = new THREE.CylinderGeometry(0.98, 0.98, 0.22, 32);
+  const pattyMesh = new THREE.Mesh(pattyGeo, pattyMaterial);
+  pattyMesh.castShadow = true;
+  pattyGroup.add(pattyMesh);
+  burgerGroup.add(pattyGroup);
+
+  // Lettuce
+  const lettuceGroup = new THREE.Group();
+  const lettuceGeo = new THREE.CylinderGeometry(1.05, 1.05, 0.07, 32);
+  const lettuceMesh = new THREE.Mesh(lettuceGeo, lettuceMaterial);
+  lettuceMesh.castShadow = true;
+  lettuceGroup.add(lettuceMesh);
+  burgerGroup.add(lettuceGroup);
+
+  // Bottom Bun
+  const bunBottomGroup = new THREE.Group();
+  const bunBottomGeo = new THREE.CylinderGeometry(1.06, 1.06, 0.28, 32);
+  const bunBottomMesh = new THREE.Mesh(bunBottomGeo, bunMaterial);
+  bunBottomMesh.castShadow = true;
+  bunBottomGroup.add(bunBottomMesh);
+  burgerGroup.add(bunBottomGroup);
+
+  const basePositions = { bunTop: 0.45, tomato: 0.18, cheese: 0.06, patty: -0.12, lettuce: -0.32, bunBottom: -0.52 };
+  bunTopGroup.position.y = basePositions.bunTop;
+  tomatoGroup.position.y = basePositions.tomato;
+  cheeseGroup.position.y = basePositions.cheese;
+  pattyGroup.position.y = basePositions.patty;
+  lettuceGroup.position.y = basePositions.lettuce;
+  bunBottomGroup.position.y = basePositions.bunBottom;
+
+  burgerGroup.position.y = 0.05;
+
+  let scrollFraction = 0;
+  window.addEventListener("scroll", function() {
+    const scrollY = window.scrollY;
+    const maxScroll = 450;
+    scrollFraction = Math.min(scrollY / maxScroll, 1.0);
+  }, { passive: true });
+
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener("mousemove", function(e) {
+    mouseX = (e.clientX / window.innerWidth) - 0.5;
+    mouseY = (e.clientY / window.innerHeight) - 0.5;
+  }, { passive: true });
+
+  window.addEventListener("resize", function() {
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height, false);
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    burgerGroup.rotation.y += 0.006;
+    burgerGroup.rotation.x += (mouseY * 0.6 - burgerGroup.rotation.x) * 0.05;
+    burgerGroup.rotation.z += (-mouseX * 0.4 - burgerGroup.rotation.z) * 0.05;
+
+    bunTopGroup.position.y = basePositions.bunTop + scrollFraction * 2.2;
+    tomatoGroup.position.y = basePositions.tomato + scrollFraction * 1.35;
+    cheeseGroup.position.y = basePositions.cheese + scrollFraction * 0.65;
+    pattyGroup.position.y = basePositions.patty - scrollFraction * 0.15;
+    lettuceGroup.position.y = basePositions.lettuce - scrollFraction * 0.85;
+    bunBottomGroup.position.y = basePositions.bunBottom - scrollFraction * 1.65;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
 </script>
 </body>
 </html>
