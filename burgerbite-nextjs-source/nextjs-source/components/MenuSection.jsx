@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { menuData, categories, formatINR } from "@/lib/menuData";
 
@@ -72,6 +73,36 @@ function PlaceholderArt({ name, category }) {
   );
 }
 
+function FoodImage({ src, name, category }) {
+  const [loaded, setLoaded] = useState(false);
+  const [errored, setErrored] = useState(false);
+
+  if (errored) {
+    return <PlaceholderArt name={name} category={category} />;
+  }
+
+  return (
+    <div className="relative w-full h-full">
+      {/* Shimmer skeleton while loading */}
+      {!loaded && (
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] via-[#252525] to-[#1a1a1a] animate-pulse" />
+      )}
+      <img
+        src={src}
+        alt={name}
+        loading="lazy"
+        onLoad={() => setLoaded(true)}
+        onError={() => setErrored(true)}
+        className={`w-full h-full object-cover transition-all duration-500 ${
+          loaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
+        } group-hover:scale-105`}
+      />
+      {/* Subtle dark gradient at bottom for name legibility */}
+      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
 function MenuCard({ item, qty, updateQty }) {
   return (
     <motion.div
@@ -82,11 +113,18 @@ function MenuCard({ item, qty, updateQty }) {
       whileHover={{ scale: 1.015 }}
       whileTap={{ scale: 0.985 }}
       transition={{ duration: 0.2 }}
-      className="bg-[#161616] border-2 border-white/5 hover:border-white/20 rounded-none overflow-hidden flex flex-col transition-colors duration-300"
+      className="group bg-[#161616] border-2 border-white/5 hover:border-[#FF6B00]/40 rounded-none overflow-hidden flex flex-col transition-colors duration-300"
     >
-      <div className="aspect-[4/3] bg-[#0D0D0D] overflow-hidden">
-        <PlaceholderArt name={item.name} category={item.category} />
+      {/* Food image */}
+      <div className="aspect-[4/3] bg-[#0D0D0D] overflow-hidden relative">
+        {item.image ? (
+          <FoodImage src={item.image} name={item.name} category={item.category} />
+        ) : (
+          <PlaceholderArt name={item.name} category={item.category} />
+        )}
       </div>
+
+      {/* Card body */}
       <div className="p-5 flex flex-col flex-1">
         <h3 className="font-display font-800 text-base leading-snug uppercase tracking-wide">{item.name}</h3>
         <p className="text-xs text-[#F5EFE6]/50 mt-2 leading-relaxed flex-1 font-sans">{item.description}</p>
