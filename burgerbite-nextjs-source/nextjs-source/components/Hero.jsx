@@ -272,15 +272,15 @@ export default function Hero({ onExploreClick }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="relative w-full aspect-[4/3] sm:aspect-[16/9] rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-[#1A1A1A] to-[#0D0D0D] flex items-center justify-center"
+          className="relative w-full aspect-[4/3] sm:aspect-[16/9] rounded-none overflow-hidden border-2 border-white/10 bg-[#161616] flex items-center justify-center"
         >
           <canvas
             ref={canvasRef}
             className="w-full h-full block focus:outline-none cursor-grab active:cursor-grabbing"
             style={{ minHeight: "320px" }}
           />
-          <div className="absolute top-4 left-4 pointer-events-none bg-black/40 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full">
-            <span className="text-[10px] uppercase tracking-widest text-[#F5EFE6]/50 font-display font-700">
+          <div className="absolute top-4 left-4 pointer-events-none bg-black/60 border border-white/20 px-3 py-1.5 rounded-none">
+            <span className="text-[10px] uppercase tracking-widest text-[#F5EFE6]/60 font-display font-800">
               Interactive 3D — Scroll to Explode
             </span>
           </div>
@@ -292,7 +292,7 @@ export default function Hero({ onExploreClick }) {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="mt-10 text-center max-w-2xl mx-auto"
         >
-          <h1 className="font-display font-800 text-4xl sm:text-6xl leading-[1.05] tracking-tight">
+          <h1 className="font-display font-800 text-4xl sm:text-6xl leading-[1.05] tracking-tighter uppercase">
             Craving a BurgerBite?
             <br />
             <span className="text-[#FF6B00]">Order Direct &amp; Save 10%.</span>
@@ -302,7 +302,7 @@ export default function Hero({ onExploreClick }) {
           </p>
           <button
             onClick={onExploreClick}
-            className="mt-8 inline-flex items-center gap-2 bg-[#FF6B00] text-[#121212] font-display font-700 px-8 py-4 rounded-full text-base active:scale-95 hover:brightness-110 transition-all shadow-[0_8px_30px_rgba(255,107,0,0.35)]"
+            className="mt-8 inline-flex items-center gap-2 bg-[#FF6B00] text-[#121212] font-display font-800 tracking-wider uppercase px-8 py-4 rounded-none border-2 border-[#FF6B00] hover:bg-transparent hover:text-[#FF6B00] active:scale-95 hover:brightness-110 transition-all shadow-[0_8px_30px_rgba(255,107,0,0.2)]"
           >
             Explore Menu
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
