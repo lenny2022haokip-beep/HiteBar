@@ -94,27 +94,58 @@ ${itemLines}
       <Header itemCount={itemCount} onCartClick={() => setIsCartOpen(true)} onMenuClick={scrollToMenu} />
       <Hero onExploreClick={scrollToMenu} />
       
-      {/* Local Banner Image Section */}
-      <section className="border-y-2 border-white/10 bg-[#0d0d0d] overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="relative border-2 border-white/10 rounded-none overflow-hidden aspect-[3/2]">
-              <img
-                src="/video_file.jpg"
-                alt="Cheeseburger craft advertising photography"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
+      {/* Cinematic Burger Showcase Section */}
+      <section className="relative overflow-hidden bg-[#080808]">
+        {/* Full-width hero image */}
+        <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] min-h-[420px] max-h-[680px] overflow-hidden">
+          <img
+            src="/pinterest_burger.jpg"
+            alt="Juicy steaming cheeseburger with bacon and fresh ingredients"
+            className="w-full h-full object-cover object-center scale-105 hover:scale-100 transition-transform duration-[2000ms] ease-out"
+          />
+          {/* Dark gradient overlays for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/30 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 z-10" />
+
+          {/* Overlaid text content */}
+          <div className="absolute inset-0 z-20 flex items-center">
+            <div className="max-w-6xl mx-auto w-full px-6 sm:px-10">
+              <div className="max-w-lg">
+                <span className="block text-[10px] sm:text-xs font-display font-800 tracking-[0.3em] uppercase text-[#FF6B00] mb-3 sm:mb-4">
+                  Crafted to perfection
+                </span>
+                <h2 className="font-display font-800 text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tighter leading-[0.9] text-white mb-4 sm:mb-6">
+                  FLAME-GRILLED.<br />
+                  <span className="text-[#FF6B00]">PURE FLAVOR.</span>
+                </h2>
+                <p className="text-sm sm:text-base text-[#F5EFE6]/75 leading-relaxed font-sans max-w-sm mb-6 sm:mb-8">
+                  Hand-pressed patties, signature spice rub, grilled to order. No shortcuts — because you don&apos;t compromise on taste.
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-[2px] bg-[#FF6B00]" />
+                  <span className="text-[10px] font-display font-800 tracking-[0.25em] uppercase text-[#FF6B00]/80">
+                    Order Direct. Save 10%.
+                  </span>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col justify-center">
-              <span className="text-xs font-display font-800 tracking-widest uppercase text-[#FF6B00] mb-3">
-                Crafted to perfection
-              </span>
-              <h2 className="font-display font-800 text-3xl sm:text-4xl uppercase tracking-tighter mb-4 leading-tight">
-                Flame-grilled, fresh ingredients, pure flavor.
-              </h2>
-              <p className="text-sm text-[#F5EFE6]/60 leading-relaxed font-sans">
-                Every single patty is hand-pressed, seasoned with our signature spice rub, and grilled to order. We don't take shortcuts because you don't compromise on taste.
-              </p>
+          </div>
+        </div>
+
+        {/* Bottom stats bar */}
+        <div className="border-t-2 border-white/10 bg-[#0d0d0d]">
+          <div className="max-w-6xl mx-auto px-6 sm:px-10">
+            <div className="grid grid-cols-3 divide-x-2 divide-white/10">
+              {[
+                { number: "100%", label: "Fresh Beef" },
+                { number: "10%", label: "Direct Savings" },
+                { number: "30min", label: "Avg. Delivery" },
+              ].map(({ number, label }) => (
+                <div key={label} className="py-6 sm:py-8 px-4 sm:px-8 text-center">
+                  <div className="font-display font-800 text-2xl sm:text-4xl text-[#FF6B00] tracking-tighter uppercase">{number}</div>
+                  <div className="text-[10px] sm:text-xs font-display font-800 tracking-[0.2em] uppercase text-[#F5EFE6]/50 mt-1">{label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
