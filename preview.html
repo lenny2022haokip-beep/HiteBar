@@ -4,25 +4,142 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>BurgerBite — Order Direct &amp; Save 10%</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
   :root {
-    --bg: #121212;
+    --bg: #0a0a0a;
+    --background: #0a0a0a;
+    --foreground: #f5efe6;
     --card: #161616;
-    --card2: #1E1E1E;
-    --accent: #FF6B00;
-    --cream: #F5EFE6;
+    --card2: #1e1e1e;
+    --accent: #ff6b00;
+    --accent-hot: #ff3c6e;
+    --accent-yellow: #ffd600;
+    --neon-green: #39ff14;
+    --cream: #f5efe6;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--cream);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+  .font-display { font-family: "Plus Jakarta Sans", "Space Grotesk", sans-serif; }
+  .font-hero { font-family: "Bebas Neue", "Syne", sans-serif; letter-spacing: 0.02em; }
+  .font-sans { font-family: "Space Grotesk", sans-serif; }
+
+  /* ─── GRADIENT TEXT ─────────────────── */
+  .text-gradient-fire {
+    background: linear-gradient(135deg, #ff6b00 0%, #ffd600 45%, #ff3c6e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-hot {
+    background: linear-gradient(90deg, #ff6b00 0%, #ff3c6e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ─── NOISE OVERLAY ─────────────────── */
+  .noise-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 30;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+  }
+
+  /* ─── ANIMATIONS & KEYFRAMES ─────────── */
+  @keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    animation: marquee 22s linear infinite;
+    will-change: transform;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes float-badge {
+    0%, 100% { transform: translateY(0px) rotate(-2deg); }
+    50%       { transform: translateY(-8px) rotate(2deg); }
+  }
+  .badge-float {
+    animation: float-badge 3.5s ease-in-out infinite;
+  }
+
+  .neon-orange {
+    text-shadow: 0 0 20px rgba(255,107,0,0.8), 0 0 60px rgba(255,107,0,0.4);
+  }
+  .neon-box {
+    box-shadow: 0 0 20px rgba(255,107,0,0.35), 0 0 60px rgba(255,107,0,0.15);
+  }
+
+  .glass {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .glass-dark {
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,107,0,0.2);
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .shimmer-btn {
+    background: linear-gradient(90deg, #ff6b00 0%, #ffd600 40%, #ff3c6e 60%, #ff6b00 100%);
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+  }
+  .shimmer-pulse {
+    background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
+    background-size: 200% auto;
+    animation: shimmer 1.5s infinite linear;
+  }
+
+  @keyframes pulse-ring {
+    0%   { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+  .pulse-ring::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 9999px;
+    border: 2px solid #ff6b00;
+    animation: pulse-ring 2s ease-out infinite;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .sticker-spin {
+    animation: spin-slow 12s linear infinite;
+  }
+
   ::-webkit-scrollbar { width: 8px; height: 8px; }
   ::-webkit-scrollbar-track { background: #1a1a1a; }
   ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 0; }
@@ -69,74 +186,415 @@
 
   /* ---------- Hero ---------- */
   .hero-wrap {
-    position: relative; overflow: hidden; width: 100%; min-height: 90vh;
-    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #080808;
     border-bottom: 2px solid rgba(255,255,255,0.1);
-    background: #0A0A0A;
   }
   .video-container {
-    position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
   }
   .bg-video {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: brightness(0.65) contrast(1.1);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.45) contrast(1.2) saturate(1.15);
   }
   .vignette {
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 50%, rgba(0,0,0,0.85) 100%);
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.3) 100%);
     z-index: 1;
   }
   .dimmer {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,0.25);
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.5) 0%, transparent 50%, rgba(0,0,0,0.5) 100%);
     z-index: 1;
   }
   .hero-text {
-    position: relative; z-index: 10; text-align: center; max-width: 780px; margin: 40px auto;
-    background: transparent; border: none; backdrop-filter: none;
-    padding: 32px; animation: fadeUp 0.7s ease both; pointer-events: auto;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 120px 20px 20px;
+    animation: fadeUp 0.7s ease both;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  .tagline {
-    display: block; font-size: 12px; font-weight: 800; letter-spacing: 0.25em;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
-    animation: pulse 2s infinite;
+  .hero-badge-wrap {
+    position: absolute;
+    top: 96px;
+    right: 24px;
+    z-index: 30;
   }
-  .hero-text h1 { font-size: 54px; line-height: 0.95; font-weight: 800; margin: 0; letter-spacing: -0.04em; text-transform: uppercase; }
-  @media (min-width: 640px) { .hero-text h1 { font-size: 72px; } }
-  .hero-text h1 .accent { color: var(--accent); }
-  .hero-text p {
-    margin: 24px 0 0; color: #F5EFE6; font-size: 14px; font-weight: 700;
-    letter-spacing: 0.08em; line-height: 1.6; text-transform: uppercase; opacity: 0.95;
+  @media (max-width: 640px) {
+    .hero-badge-wrap {
+      top: 80px;
+      right: 16px;
+    }
   }
-  @media (min-width: 640px) { .hero-text p { font-size: 16px; } }
-  .cta-btn {
-    margin-top: 40px; display: inline-flex; align-items: center; gap: 10px;
-    background: var(--accent); color: var(--bg); font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 800; padding: 20px 40px; border-radius: 0; border: 2px solid var(--accent); font-size: 14px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    cursor: pointer; transition: all 0.15s;
-    box-shadow: 0 12px 40px rgba(255,107,0,0.3);
+  .glass-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    margin-bottom: 24px;
   }
-  .cta-btn:hover { background: transparent; color: var(--accent); }
-  .cta-btn:active { transform: scale(0.95); }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+  .pulse-dot {
+    position: relative;
+    display: flex;
+    height: 8px;
+    width: 8px;
+  }
+  .pulse-dot::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 9999px;
+    border: 2px solid var(--accent);
+    animation: pulse-ring 2s ease-out infinite;
+  }
+  .pulse-dot .dot {
+    position: relative;
+    display: inline-flex;
+    border-radius: 9999px;
+    height: 8px;
+    width: 8px;
+    background-color: var(--accent);
+  }
+  .glass-pill span.pill-text {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245, 239, 230, 0.8);
+  }
+  .hero-title {
+    line-height: 0.88;
+    letter-spacing: 0.03em;
+    margin: 0 0 16px;
+    font-weight: 800;
+    user-select: none;
+    text-align: center;
+  }
+  .hero-title span.l1 {
+    display: block;
+    font-size: clamp(3rem, 11vw, 8.5rem);
+    color: transparent;
+    -webkit-text-stroke: 2px var(--accent);
+  }
+  .hero-title span.l2 {
+    display: block;
+    font-size: clamp(3.2rem, 13vw, 10rem);
+    filter: drop-shadow(0 0 60px rgba(255,107,0,0.5));
+  }
+  .hero-title span.l3 {
+    display: block;
+    font-size: clamp(2.5rem, 9vw, 7rem);
+    color: rgba(255,255,255,0.95);
+    filter: drop-shadow(0 4px 30px rgba(0,0,0,0.8));
+  }
+  .hero-desc {
+    font-size: 14px;
+    max-width: 512px;
+    margin: 0 auto 32px;
+    color: rgba(245, 239, 230, 0.65);
+    line-height: 1.6;
+    font-weight: 500;
+    text-transform: none;
+    opacity: 1;
+  }
+  @media (min-width: 640px) {
+    .hero-desc {
+      font-size: 16px;
+    }
+  }
+  .cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .cta-group {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+  .cta-group button {
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .cta-group .shimmer-btn {
+    position: relative;
+    color: #0a0a0a;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 16px 36px;
+    border: none;
+    filter: drop-shadow(0 0 20px rgba(255,107,0,0.35));
+    transition: transform 0.1s;
+  }
+  .cta-group .shimmer-btn:active {
+    transform: scale(0.95);
+  }
+  .cta-group .cta-sec {
+    color: rgba(245, 239, 230, 0.8);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 16px 28px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    transition: all 0.2s;
+  }
+  .cta-group .cta-sec:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+  .cta-group .cta-sec:active {
+    transform: scale(0.95);
+  }
+
+  /* Glass Stat Pills */
+  .glass-stats {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .glass-stat-card {
+    border-radius: 0px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 130px;
+    text-align: left;
+  }
+  .glass-stat-card .icon {
+    font-size: 20px;
+  }
+  .glass-stat-card .stat-val {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .glass-stat-card .stat-lbl {
+    font-size: 9px;
+    color: rgba(245, 239, 230, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+
+  /* Marquee Strip */
+  .marquee-ticker {
+    width: 100%;
+    border-top: 1px solid rgba(255, 107, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 107, 0, 0.3);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    overflow: hidden;
+    padding: 12px 0;
+    margin-top: auto;
+    z-index: 10;
+  }
+  .marquee-container {
+    display: flex;
+    width: max-content;
+  }
+  .marquee-container span {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    padding: 0 32px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+  }
+  .marquee-container span .dot {
+    margin-left: 24px;
+    opacity: 0.3;
+  }
+
+  /* ---------- Showcase Section ---------- */
+  .showcase-sec {
+    position: relative;
+    overflow: hidden;
+    background: #080808;
+    border-top: 2px solid rgba(255,255,255,0.05);
+    border-bottom: 2px solid rgba(255,255,255,0.05);
+  }
+  .showcase-banner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    min-height: 420px;
+    max-height: 680px;
+    overflow: hidden;
+  }
+  @media (min-width: 640px) {
+    .showcase-banner {
+      aspect-ratio: 21/9;
+    }
+  }
+  .showcase-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+    transform: scale(1.05);
+    transition: transform 2s ease-out;
+  }
+  .showcase-banner:hover img {
+    transform: scale(1.0);
+  }
+  .showcase-gradient-r {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    z-index: 10;
+  }
+  .showcase-gradient-t {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%, rgba(0,0,0,0.3) 100%);
+    z-index: 10;
+  }
+  .showcase-content {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+  }
+  .showcase-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 20px;
+    text-align: left;
+  }
+  .showcase-textbox {
+    max-width: 480px;
+  }
+  .showcase-textbox span.sub {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .showcase-textbox h2 {
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 0 0 16px;
+  }
+  .showcase-textbox h2 span {
+    color: var(--accent);
+  }
+  .showcase-textbox p {
+    font-size: 13px;
+    color: rgba(245, 239, 230, 0.75);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    text-transform: none;
+    opacity: 1;
+  }
+  @media (min-width: 640px) {
+    .showcase-textbox p {
+      font-size: 15px;
+    }
+  }
+  .showcase-textbox .line-decor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .showcase-textbox .line-decor .line {
+    width: 48px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .showcase-textbox .line-decor span {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255, 107, 0, 0.8);
+  }
+
+  .showcase-stats-bar {
+    border-top: 2px solid rgba(255,255,255,0.1);
+    background: #0d0d0d;
+  }
+  .showcase-stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .showcase-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .showcase-stats-grid .stat-item {
+    padding: 24px 12px;
+    text-align: center;
+    border-right: 2px solid rgba(255,255,255,0.1);
+  }
+  .showcase-stats-grid .stat-item:last-child {
+    border-right: none;
+  }
+  .showcase-stats-grid .stat-item .num {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    font-weight: 800;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+  .showcase-stats-grid .stat-item .lbl {
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245, 239, 230, 0.5);
+    margin-top: 4px;
+  }
 
   .grill-divider {
     height: 6px; opacity: 0.6;
     background-image: repeating-linear-gradient(90deg, var(--accent) 0px, var(--accent) 18px, transparent 18px, transparent 34px);
   }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* ---------- Pinterest Banner ---------- */
-  .pinterest-banner { border-top: 2px solid rgba(255,255,255,0.1); border-bottom: 2px solid rgba(255,255,255,0.1); background: #0d0d0d; padding: 48px 20px; }
-  .banner-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
-  @media (min-width: 768px) { .banner-inner { grid-template-columns: 1fr 1fr; } }
-  .banner-img-box { border: 2px solid rgba(255,255,255,0.1); overflow: hidden; aspect-ratio: 3/2; }
-  .banner-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-  .banner-img-box:hover img { transform: scale(1.05); }
-  .banner-text .tag { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-  .banner-text h2 { font-size: 28px; font-weight: 800; margin: 0 0 16px; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.2; }
-  .banner-text p { font-size: 14px; color: rgba(245,239,230,0.6); line-height: 1.6; margin: 0; }
 
   /* ---------- Why Order Direct ---------- */
   .why-section { max-width: 1100px; margin: 0 auto; padding: 64px 20px; border-top: 2px solid rgba(255,255,255,0.05); }
@@ -300,35 +758,146 @@
   </div>
 </header>
 
-<section class="hero-wrap">
+<section class="hero-wrap noise-overlay">
+  <!-- Background Video -->
   <div class="video-container">
-    <video autoplay muted loop playsinline class="bg-video">
+    <video autoplay muted loop playsinline poster="hero_burger.jpg" class="bg-video">
       <source src="burger_video.mp4" type="video/mp4">
+      <img src="hero_burger.jpg" alt="Gourmet burger" class="bg-video">
     </video>
     <div class="vignette"></div>
     <div class="dimmer"></div>
   </div>
+
+  <!-- Floating Sticker Badge -->
+  <div class="hero-badge-wrap badge-float select-none">
+    <div style="position: relative; width: 96px; height: 96px;">
+      <svg viewBox="0 0 100 100" class="sticker-spin opacity-90" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+        <defs>
+          <path id="circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+        </defs>
+        <text class="fill-[#FF6B00]" font-size="10" font-family="Space Grotesk, sans-serif" font-weight="700" letter-spacing="2" style="fill: var(--accent);">
+          <textPath href="#circle">🔥 ORDER NOW • SAVE 10% • </textPath>
+        </text>
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 24px;">🍔</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Content -->
   <div class="hero-text">
-    <span class="tagline">Hot &amp; Fresh from the Grill</span>
-    <h1 class="font-display">THE BEST BURGER<br/><span class="accent">IN TOWN.</span></h1>
-    <p>NO FRANCHISE FEES. NO COMMISSIONS. JUST HOT, JUICY, UNCOMPROMISING BEEF DELIVERED DIRECTLY TO YOUR DOOR.</p>
-    <button class="cta-btn" onclick="scrollToMenu()">
-      ORDER DIRECT &amp; SAVE 10%
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-    </button>
+    <div class="glass glass-pill">
+      <span class="pulse-dot">
+        <span class="dot"></span>
+      </span>
+      <span class="pill-text">Now Delivering Near You</span>
+    </div>
+
+    <h1 class="hero-title font-hero">
+      <span class="l1">THE BEST</span>
+      <span class="l2 text-gradient-fire">BURGER</span>
+      <span class="l3">IN TOWN.</span>
+    </h1>
+
+    <p class="hero-desc">
+      No franchise fees. No commissions. Just hot, juicy, uncompromising flavour — delivered straight to your door.
+    </p>
+
+    <div class="cta-group">
+      <button class="shimmer-btn neon-box" onclick="scrollToMenu()">
+        🍔 Order Direct &amp; Save 10%
+      </button>
+      <button class="cta-sec" onclick="scrollToMenu()">
+        View Menu →
+      </button>
+    </div>
+
+    <!-- Glass Stat Pills -->
+    <div class="glass-stats">
+      <div class="glass-dark glass-stat-card">
+        <span class="icon">⚡</span>
+        <div>
+          <div class="font-hero stat-val">30 min</div>
+          <div class="stat-lbl">Avg delivery</div>
+        </div>
+      </div>
+      <div class="glass-dark glass-stat-card">
+        <span class="icon">💯</span>
+        <div>
+          <div class="font-hero stat-val">100%</div>
+          <div class="stat-lbl">Fresh ingredients</div>
+        </div>
+      </div>
+      <div class="glass-dark glass-stat-card">
+        <span class="icon">💸</span>
+        <div>
+          <div class="font-hero stat-val">10%</div>
+          <div class="stat-lbl">Direct savings</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee Ticker strip -->
+  <div class="marquee-ticker">
+    <div class="marquee-track">
+      <div class="marquee-container">
+        <span>🔥 FRESH OFF THE GRILL<span class="dot">✦</span></span>
+        <span>🍔 ORDER DIRECT. NO HIDDEN FEES<span class="dot">✦</span></span>
+        <span>⚡ SAVE 10% EVERY ORDER<span class="dot">✦</span></span>
+        <span>🌶️ LIMITED TIME SPECIALS<span class="dot">✦</span></span>
+        <span>🚀 HOT &amp; DELIVERED FAST<span class="dot">✦</span></span>
+        <span>💯 100% REAL INGREDIENTS<span class="dot">✦</span></span>
+        <span>🔥 FRESH OFF THE GRILL<span class="dot">✦</span></span>
+        <span>🍔 ORDER DIRECT. NO HIDDEN FEES<span class="dot">✦</span></span>
+        <span>⚡ SAVE 10% EVERY ORDER<span class="dot">✦</span></span>
+        <span>🌶️ LIMITED TIME SPECIALS<span class="dot">✦</span></span>
+        <span>🚀 HOT &amp; DELIVERED FAST<span class="dot">✦</span></span>
+        <span>💯 100% REAL INGREDIENTS<span class="dot">✦</span></span>
+      </div>
+    </div>
   </div>
 </section>
-<div class="grill-divider"></div>
 
-<section class="pinterest-banner">
-  <div class="banner-inner">
-    <div class="banner-img-box">
-      <img src="video file.jpg" alt="Cheeseburger photography" />
+<section class="showcase-sec">
+  <div class="showcase-banner">
+    <img src="showcase_burger.jpg" alt="Gourmet smash burger with fries on rustic wooden board" />
+    <div class="showcase-gradient-r"></div>
+    <div class="showcase-gradient-t"></div>
+    <div class="showcase-content">
+      <div class="showcase-inner">
+        <div class="showcase-textbox">
+          <span class="sub">Crafted to perfection</span>
+          <h2>FLAME-GRILLED.<br /><span>PURE FLAVOR.</span></h2>
+          <p>Hand-pressed patties, signature spice rub, grilled to order. No shortcuts — because you don't compromise on taste.</p>
+          <div class="line-decor">
+            <div class="line"></div>
+            <span>Order Direct. Save 10%.</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="banner-text">
-      <span class="tag">Crafted to perfection</span>
-      <h2>FLAME-GRILLED, FRESH INGREDIENTS, PURE FLAVOR.</h2>
-      <p>Every single patty is hand-pressed, seasoned with our signature spice rub, and grilled to order. We don't take shortcuts because you don't compromise on taste.</p>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="showcase-stats-bar">
+    <div class="showcase-stats-inner">
+      <div class="showcase-stats-grid">
+        <div class="stat-item">
+          <div class="num font-hero">100%</div>
+          <div class="lbl">Fresh Beef</div>
+        </div>
+        <div class="stat-item">
+          <div class="num font-hero">10%</div>
+          <div class="lbl">Direct Savings</div>
+        </div>
+        <div class="stat-item">
+          <div class="num font-hero">30min</div>
+          <div class="lbl">Avg. Delivery</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -411,60 +980,67 @@ const STORE_WHATSAPP = "919673483659";
 const DELIVERY_FEE = 50;
 
 const menuData = [
-  { id: "b1", name: "Veg Burger", description: "Crisp veg patty, lettuce & house sauce in a soft bun.", price: 80, category: "Burgers" },
-  { id: "b2", name: "Veg Burger with Cheese", description: "Our veg burger, loaded with melted cheese.", price: 100, category: "Burgers" },
-  { id: "b3", name: "Double Patty (Veg)", description: "Two veg patties stacked high for serious hunger.", price: 120, category: "Burgers" },
-  { id: "b4", name: "Paneer Burger", description: "Grilled paneer steak, fresh veggies, soft bun.", price: 120, category: "Burgers" },
-  { id: "b5", name: "Paneer Burger with Cheese", description: "Paneer burger topped with a generous layer of cheese.", price: 140, category: "Burgers" },
-  { id: "b6", name: "Egg Burger", description: "Fried egg, fresh greens & house mayo in a toasted bun.", price: 80, category: "Burgers" },
-  { id: "b7", name: "Egg Burger with Cheese", description: "Our classic egg burger with melted cheese.", price: 100, category: "Burgers" },
-  { id: "b8", name: "Chicken Burger", description: "Juicy chicken patty, crisp lettuce & signature sauce.", price: 120, category: "Burgers" },
-  { id: "b9", name: "Chicken Grilled Burger", description: "Flame-grilled chicken breast, smoky & tender.", price: 160, category: "Burgers" },
-  { id: "b10", name: "Chicken Steak Burger", description: "Hand-pressed chicken steak patty, thick & hearty.", price: 120, category: "Burgers" },
-  { id: "b11", name: "Chicken Crispy Burger", description: "Golden crispy fried chicken fillet, crunch in every bite.", price: 120, category: "Burgers" },
-  { id: "b12", name: "Fish Burger", description: "Crispy fried fish fillet with tartar-style house sauce.", price: 180, category: "Burgers" },
-  { id: "b13", name: "Fish Double Patty", description: "Double the fish fillet, double the crunch.", price: 240, category: "Burgers" },
-  { id: "b14", name: "Mutton Burger", description: "Rich, spiced mutton patty grilled to order.", price: 200, category: "Burgers" },
-  { id: "b15", name: "Hite Burger", description: "Our signature house-special burger, loaded & stacked.", price: 120, category: "Burgers" },
-  { id: "r1", name: "Paneer Roll", description: "Grilled paneer wrapped in soft khabus bread.", price: 120, category: "Rolls & Shawarma" },
-  { id: "r2", name: "Paneer Tikka Roll", description: "Smoky tandoor-spiced paneer tikka in a warm roll.", price: 120, category: "Rolls & Shawarma" },
-  { id: "r3", name: "Paneer Barbeque Sauce Roll", description: "Paneer roll finished with a smoky barbeque glaze.", price: 130, category: "Rolls & Shawarma" },
-  { id: "r4", name: "Paneer Garlic Spicy Roll", description: "Bold garlic-chilli paneer, rolled up hot.", price: 120, category: "Rolls & Shawarma" },
-  { id: "r5", name: "Paneer Peri Peri Roll", description: "Peri-peri spiced paneer with fresh veg crunch.", price: 110, category: "Rolls & Shawarma" },
-  { id: "r6", name: "Falafel Roll", description: "Crisp falafel, fresh salad & tahini-style sauce.", price: 100, category: "Rolls & Shawarma" },
-  { id: "r7", name: "Egg Roll", description: "Fluffy egg rolled with onions & house masala.", price: 80, category: "Rolls & Shawarma" },
-  { id: "r8", name: "Chicken Mayonnaise Roll", description: "Shredded chicken tossed in creamy mayonnaise.", price: 120, category: "Rolls & Shawarma" },
-  { id: "r9", name: "Chicken Tikka Masala Roll", description: "Char-grilled chicken tikka in a rich masala roll.", price: 150, category: "Rolls & Shawarma" },
-  { id: "r10", name: "Chicken Keema Roll", description: "Spiced minced chicken keema, rolled fresh.", price: 150, category: "Rolls & Shawarma" },
-  { id: "r11", name: "Chicken Roll", description: "Our classic chicken roll — simple, spiced, satisfying.", price: 120, category: "Rolls & Shawarma" },
-  { id: "r12", name: "Chicken Kati Roll", description: "Skewer-grilled chicken kati style, wrapped hot.", price: 150, category: "Rolls & Shawarma" },
-  { id: "r13", name: "Chicken Hot Dog", description: "Grilled chicken sausage, mustard & house sauce.", price: 150, category: "Rolls & Shawarma" },
-  { id: "r14", name: "Chicken Shawarma", description: "Slow-roasted chicken shawarma, garlic sauce & pickles.", price: 100, category: "Rolls & Shawarma" },
-  { id: "r15", name: "Chicken Shawarma with Barbeque Sauce", description: "Our chicken shawarma finished with smoky BBQ sauce.", price: 110, category: "Rolls & Shawarma" },
-  { id: "r16", name: "Spicy Chicken Shawarma", description: "Extra hot spice rub, for the heat-seekers.", price: 140, category: "Rolls & Shawarma" },
-  { id: "r17", name: "Peri Peri Shawarma", description: "Tangy peri-peri marinated chicken shawarma.", price: 140, category: "Rolls & Shawarma" },
-  { id: "s1", name: "Falafel (Starter)", description: "Crisp-fried chickpea falafel, served warm.", price: 130, category: "Sides & Fries" },
-  { id: "s2", name: "Veg Cutlet", description: "Golden-fried vegetable cutlets, lightly spiced.", price: 50, category: "Sides & Fries" },
-  { id: "s3", name: "Chicken Cutlet", description: "Crumbed & fried chicken cutlets, crunchy outside.", price: 60, category: "Sides & Fries" },
-  { id: "s4", name: "Hite Cutlet", description: "House-special cutlet blend, fried to order.", price: 60, category: "Sides & Fries" },
-  { id: "s5", name: "Grilled Chicken Cutlet", description: "Chicken cutlet, char-grilled instead of fried.", price: 70, category: "Sides & Fries" },
-  { id: "s6", name: "French Fries", description: "Classic golden fries, salted just right.", price: 80, category: "Sides & Fries" },
-  { id: "s7", name: "French Fries with Cheese", description: "Our fries loaded with melted cheese.", price: 100, category: "Sides & Fries" },
-  { id: "s8", name: "French Fries with Peri Peri Masala", description: "Fries tossed in tangy peri-peri masala.", price: 100, category: "Sides & Fries" },
-  { id: "s9", name: "French Fries with Garlic Cheese", description: "Fries topped with garlic butter and cheese.", price: 120, category: "Sides & Fries" },
-  { id: "s10", name: "Fish & Chips", description: "Crispy fried fish fillet with a side of fries.", price: 200, category: "Sides & Fries" },
-  { id: "s11", name: "Plain Cheese Pizza", description: "Simple, cheesy, straight out of the oven.", price: 150, category: "Sides & Fries" },
-  { id: "s12", name: "Chicken Shawarma Pizza", description: "Shawarma-spiced chicken over a cheesy pizza base.", price: 200, category: "Sides & Fries" },
-  { id: "s13", name: "Chicken Pizza", description: "Loaded with grilled chicken & melted cheese.", price: 200, category: "Sides & Fries" },
-  { id: "s14", name: "Veg Pizza / Grilled Sandwich", description: "Fresh veggies over cheese, pizza or sandwich style.", price: 170, category: "Sides & Fries" },
-  { id: "d1", name: "Cold Drink (200ml)", description: "Chilled soft drink, served ice-cold.", price: 40, category: "Drinks & Desserts", verify: true },
-  { id: "d2", name: "Cold Blue", description: "House blue mocktail, fruity & refreshing.", price: 90, category: "Drinks & Desserts", verify: true },
-  { id: "d3", name: "Mint Mojito", description: "Fresh mint & lime mojito, non-alcoholic.", price: 90, category: "Drinks & Desserts", verify: true },
-  { id: "d4", name: "Mango Milk", description: "Creamy chilled mango milk.", price: 90, category: "Drinks & Desserts", verify: true },
-  { id: "d5", name: "Shake", description: "Thick, creamy milkshake — ask for today's flavour.", price: 100, category: "Drinks & Desserts", verify: true },
-  { id: "d6", name: "Cold Coffee", description: "Chilled, frothy cold coffee.", price: 120, category: "Drinks & Desserts", verify: true },
-  { id: "d7", name: "Caramel Custard", description: "Silky caramel custard, chilled and set.", price: 100, category: "Drinks & Desserts", verify: true },
-  { id: "d8", name: "Chocolate Mousse", description: "Rich, airy chocolate mousse.", price: 120, category: "Drinks & Desserts", verify: true }
+  // ---------------- BURGERS ----------------
+  { id: "b1", name: "Veg Burger", description: "Crisp veg patty, lettuce & house sauce in a soft bun.", price: 80, category: "Burgers", image: "menu/veg-burger.jpg" },
+  { id: "b2", name: "Veg Burger with Cheese", description: "Our veg burger, loaded with melted cheese.", price: 100, category: "Burgers", image: "menu/veg-burger-cheese.jpg" },
+  { id: "b3", name: "Double Patty (Veg)", description: "Two veg patties stacked high for serious hunger.", price: 120, category: "Burgers", image: "menu/double-patty-veg.jpg" },
+  { id: "b4", name: "Paneer Burger", description: "Grilled paneer steak, fresh veggies, soft bun.", price: 120, category: "Burgers", image: "menu/paneer-burger.jpg" },
+  { id: "b5", name: "Paneer Burger with Cheese", description: "Paneer burger topped with a generous layer of cheese.", price: 140, category: "Burgers", image: "menu/paneer-burger-cheese.jpg" },
+  { id: "b6", name: "Egg Burger", description: "Fried egg, fresh greens & house mayo in a toasted bun.", price: 80, category: "Burgers", image: "menu/egg-burger.jpg" },
+  { id: "b7", name: "Egg Burger with Cheese", description: "Our classic egg burger with melted cheese.", price: 100, category: "Burgers", image: "menu/egg-burger-cheese.jpg" },
+  { id: "b8", name: "Chicken Burger", description: "Juicy chicken patty, crisp lettuce & signature sauce.", price: 120, category: "Burgers", image: "menu/chicken-burger.jpg" },
+  { id: "b9", name: "Chicken Grilled Burger", description: "Flame-grilled chicken breast, smoky & tender.", price: 160, category: "Burgers", image: "menu/chicken-grilled-burger.jpg" },
+  { id: "b10", name: "Chicken Steak Burger", description: "Hand-pressed chicken steak patty, thick & hearty.", price: 120, category: "Burgers", image: "menu/chicken-steak-burger.jpg" },
+  { id: "b11", name: "Chicken Crispy Burger", description: "Golden crispy fried chicken fillet, crunch in every bite.", price: 120, category: "Burgers", image: "menu/chicken-crispy-burger.jpg" },
+  { id: "b12", name: "Fish Burger", description: "Crispy fried fish fillet with tartar-style house sauce.", price: 180, category: "Burgers", image: "menu/fish-burger.jpg" },
+  { id: "b13", name: "Fish Double Patty", description: "Double the fish fillet, double the crunch.", price: 240, category: "Burgers", image: "menu/fish-double-patty.jpg" },
+  { id: "b14", name: "Mutton Burger", description: "Rich, spiced mutton patty grilled to order.", price: 200, category: "Burgers", image: "menu/mutton-burger.jpg" },
+  { id: "b15", name: "Hite Burger", description: "Our signature house-special burger, loaded & stacked.", price: 120, category: "Burgers", image: "menu/hite-burger.jpg" },
+
+  // ---------------- ROLLS & SHAWARMA ----------------
+  { id: "r1", name: "Paneer Roll", description: "Grilled paneer wrapped in soft khabus bread.", price: 120, category: "Rolls & Shawarma", image: "menu/paneer-roll.jpg" },
+  { id: "r2", name: "Paneer Tikka Roll", description: "Smoky tandoor-spiced paneer tikka in a warm roll.", price: 120, category: "Rolls & Shawarma", image: "menu/paneer-tikka-roll.jpg" },
+  { id: "r3", name: "Paneer Barbeque Sauce Roll", description: "Paneer roll finished with a smoky barbeque glaze.", price: 130, category: "Rolls & Shawarma", image: "menu/paneer-bbq-roll.jpg" },
+  { id: "r4", name: "Paneer Garlic Spicy Roll", description: "Bold garlic-chilli paneer, rolled up hot.", price: 120, category: "Rolls & Shawarma", image: "menu/paneer-garlic-roll.jpg" },
+  { id: "r5", name: "Paneer Peri Peri Roll", description: "Peri-peri spiced paneer with fresh veg crunch.", price: 110, category: "Rolls & Shawarma", image: "menu/paneer-peri-roll.jpg" },
+  { id: "r6", name: "Falafel Roll", description: "Crisp falafel, fresh salad & tahini-style sauce.", price: 100, category: "Rolls & Shawarma", image: "menu/falafel-roll.jpg" },
+  { id: "r7", name: "Egg Roll", description: "Fluffy egg rolled with onions & house masala.", price: 80, category: "Rolls & Shawarma", image: "menu/egg-roll.jpg" },
+  { id: "r8", name: "Chicken Mayonnaise Roll", description: "Shredded chicken tossed in creamy mayonnaise.", price: 120, category: "Rolls & Shawarma", image: "menu/chicken-mayo-roll.jpg" },
+  { id: "r9", name: "Chicken Tikka Masala Roll", description: "Char-grilled chicken tikka in a rich masala roll.", price: 150, category: "Rolls & Shawarma", image: "menu/chicken-tikka-roll.jpg" },
+  { id: "r10", name: "Chicken Keema Roll", description: "Spiced minced chicken keema, rolled fresh.", price: 150, category: "Rolls & Shawarma", image: "menu/chicken-keema-roll.jpg" },
+  { id: "r11", name: "Chicken Roll", description: "Our classic chicken roll — simple, spiced, satisfying.", price: 120, category: "Rolls & Shawarma", image: "menu/chicken-roll.jpg" },
+  { id: "r12", name: "Chicken Kati Roll", description: "Skewer-grilled chicken kati style, wrapped hot.", price: 150, category: "Rolls & Shawarma", image: "menu/chicken-kati-roll.jpg" },
+  { id: "r13", name: "Chicken Hot Dog", description: "Grilled chicken sausage, mustard & house sauce.", price: 150, category: "Rolls & Shawarma", image: "menu/chicken-hotdog.jpg" },
+  { id: "r14", name: "Chicken Shawarma", description: "Slow-roasted chicken shawarma, garlic sauce & pickles.", price: 100, category: "Rolls & Shawarma", image: "menu/chicken-shawarma.jpg" },
+  { id: "r15", name: "Chicken Shawarma with Barbeque Sauce", description: "Our chicken shawarma finished with smoky BBQ sauce.", price: 110, category: "Rolls & Shawarma", image: "menu/chicken-shawarma-bbq.jpg" },
+  { id: "r16", name: "Spicy Chicken Shawarma", description: "Extra hot spice rub, for the heat-seekers.", price: 140, category: "Rolls & Shawarma", image: "menu/spicy-shawarma.jpg" },
+  { id: "r17", name: "Peri Peri Shawarma", description: "Tangy peri-peri marinated chicken shawarma.", price: 140, category: "Rolls & Shawarma", image: "menu/peri-peri-shawarma.jpg" },
+
+  // ---------------- SIDES, FRIES & STARTERS ----------------
+  { id: "s1", name: "Falafel (Starter)", description: "Crisp-fried chickpea falafel, served warm.", price: 130, category: "Sides & Fries", image: "menu/falafel-starter.jpg" },
+  { id: "s2", name: "Veg Cutlet", description: "Golden-fried vegetable cutlets, lightly spiced.", price: 50, category: "Sides & Fries", image: "menu/veg-cutlet.jpg" },
+  { id: "s3", name: "Chicken Cutlet", description: "Crumbed & fried chicken cutlets, crunchy outside.", price: 60, category: "Sides & Fries", image: "menu/chicken-cutlet.jpg" },
+  { id: "s4", name: "Hite Cutlet", description: "House-special cutlet blend, fried to order.", price: 60, category: "Sides & Fries", image: "menu/hite-cutlet.jpg" },
+  { id: "s5", name: "Grilled Chicken Cutlet", description: "Chicken cutlet, char-grilled instead of fried.", price: 70, category: "Sides & Fries", image: "menu/grilled-chicken-cutlet.jpg" },
+  { id: "s6", name: "French Fries", description: "Classic golden fries, salted just right.", price: 80, category: "Sides & Fries", image: "menu/fries.jpg" },
+  { id: "s7", name: "French Fries with Cheese", description: "Our fries loaded with melted cheese.", price: 100, category: "Sides & Fries", image: "menu/fries-cheese.jpg" },
+  { id: "s8", name: "French Fries with Peri Peri Masala", description: "Fries tossed in tangy peri-peri masala.", price: 100, category: "Sides & Fries", image: "menu/fries-peri.jpg" },
+  { id: "s9", name: "French Fries with Garlic Cheese", description: "Fries topped with garlic butter and cheese.", price: 120, category: "Sides & Fries", image: "menu/fries-garlic-cheese.jpg" },
+  { id: "s10", name: "Fish & Chips", description: "Crispy fried fish fillet with a side of fries.", price: 200, category: "Sides & Fries", image: "menu/fish-chips.jpg" },
+  { id: "s11", name: "Plain Cheese Pizza", description: "Simple, cheesy, straight out of the oven.", price: 150, category: "Sides & Fries", image: "menu/cheese-pizza.jpg" },
+  { id: "s12", name: "Chicken Shawarma Pizza", description: "Shawarma-spiced chicken over a cheesy pizza base.", price: 200, category: "Sides & Fries", image: "menu/shawarma-pizza.jpg" },
+  { id: "s13", name: "Chicken Pizza", description: "Loaded with grilled chicken & melted cheese.", price: 200, category: "Sides & Fries", image: "menu/chicken-pizza.jpg" },
+  { id: "s14", name: "Veg Pizza / Grilled Sandwich", description: "Fresh veggies over cheese, pizza or sandwich style.", price: 170, category: "Sides & Fries", image: "menu/veg-pizza.jpg" },
+
+  // ---------------- DRINKS & DESSERTS ----------------
+  { id: "d1", name: "Cold Drink (200ml)", description: "Chilled soft drink, served ice-cold.", price: 40, category: "Drinks & Desserts", image: "menu/cold-drink.jpg", verify: true },
+  { id: "d2", name: "Cold Blue", description: "House blue mocktail, fruity & refreshing.", price: 90, category: "Drinks & Desserts", image: "menu/cold-blue.jpg", verify: true },
+  { id: "d3", name: "Mint Mojito", description: "Fresh mint & lime mojito, non-alcoholic.", price: 90, category: "Drinks & Desserts", image: "menu/mint-mojito.jpg", verify: true },
+  { id: "d4", name: "Mango Milk", description: "Creamy chilled mango milk.", price: 90, category: "Drinks & Desserts", image: "menu/mango-milk.jpg", verify: true },
+  { id: "d5", name: "Shake", description: "Thick, creamy milkshake — ask for today's flavour.", price: 100, category: "Drinks & Desserts", image: "menu/shake.jpg", verify: true },
+  { id: "d6", name: "Cold Coffee", description: "Chilled, frothy cold coffee.", price: 120, category: "Drinks & Desserts", image: "menu/cold-coffee.jpg", verify: true },
+  { id: "d7", name: "Caramel Custard", description: "Silky caramel custard, chilled and set.", price: 100, category: "Drinks & Desserts", image: "menu/caramel-custard.jpg", verify: true },
+  { id: "d8", name: "Chocolate Mousse", description: "Rich, airy chocolate mousse.", price: 120, category: "Drinks & Desserts", image: "menu/chocolate-mousse.jpg", verify: true }
 ];
 
 const categories = ["Burgers", "Rolls & Shawarma", "Sides & Fries", "Drinks & Desserts"];
@@ -503,6 +1079,33 @@ function cardArt(item) {
     </div>`;
 }
 
+function foodImage(item) {
+  if (!item.image) {
+    return cardArt(item);
+  }
+  const accent = categoryAccents[item.category] || "#FF6B00";
+  return `
+    <div class="card-art" style="aspect-ratio: 4/3; position: relative; padding: 0; overflow: hidden; background: #0D0D0D; display: flex; align-items: flex-end;">
+      <!-- Shimmer skeleton background -->
+      <div class="shimmer-pulse" style="position: absolute; inset: 0; z-index: 1;"></div>
+      <img
+        src="${item.image}"
+        alt="${item.name}"
+        loading="lazy"
+        onload="this.style.opacity='1'; this.previousElementSibling.style.display='none';"
+        onerror="this.style.display='none'; this.previousElementSibling.style.display='none'; this.nextElementSibling.style.display='block';"
+        style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s ease; position: relative; z-index: 2;"
+      />
+      <!-- Fallback placeholder if image fails to load -->
+      <div style="display: none; position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%;">
+        ${cardArt(item)}
+      </div>
+      <!-- Subtle dark gradient at bottom for name legibility -->
+      <div style="position: absolute; inset-x: 0; bottom: 0; height: 33%; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); pointer-events: none; z-index: 4;"></div>
+    </div>
+  `;
+}
+
 function renderGrid() {
   const grid = document.getElementById("item-grid");
   const items = menuData.filter(m => m.category === activeCategory);
@@ -510,7 +1113,7 @@ function renderGrid() {
     const qty = cart[item.id] || 0;
     return `
     <div class="menu-card">
-      ${cardArt(item)}
+      ${foodImage(item)}
       <div class="card-body">
         <h3>${item.name}</h3>
         <p class="desc">${item.description}</p>
