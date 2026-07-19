@@ -423,20 +423,25 @@
     margin-top: auto;
     z-index: 10;
   }
-  .marquee-container {
+  .marquee-track {
     display: flex;
     width: max-content;
+    animation: marquee 22s linear infinite;
+    will-change: transform;
   }
-  .marquee-container span {
-    font-size: 13px;
-    font-weight: 700;
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+  .marquee-track span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
     color: var(--accent);
-    padding: 0 32px;
+    padding: 0 24px;
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
   }
-  .marquee-container span .dot {
+  .marquee-track span .dot {
     margin-left: 24px;
     opacity: 0.3;
   }
@@ -843,20 +848,19 @@
   <!-- Marquee Ticker strip -->
   <div class="marquee-ticker">
     <div class="marquee-track">
-      <div class="marquee-container">
-        <span>🔥 FRESH OFF THE GRILL<span class="dot">✦</span></span>
-        <span>🍔 ORDER DIRECT. NO HIDDEN FEES<span class="dot">✦</span></span>
-        <span>⚡ SAVE 10% EVERY ORDER<span class="dot">✦</span></span>
-        <span>🌶️ LIMITED TIME SPECIALS<span class="dot">✦</span></span>
-        <span>🚀 HOT &amp; DELIVERED FAST<span class="dot">✦</span></span>
-        <span>💯 100% REAL INGREDIENTS<span class="dot">✦</span></span>
-        <span>🔥 FRESH OFF THE GRILL<span class="dot">✦</span></span>
-        <span>🍔 ORDER DIRECT. NO HIDDEN FEES<span class="dot">✦</span></span>
-        <span>⚡ SAVE 10% EVERY ORDER<span class="dot">✦</span></span>
-        <span>🌶️ LIMITED TIME SPECIALS<span class="dot">✦</span></span>
-        <span>🚀 HOT &amp; DELIVERED FAST<span class="dot">✦</span></span>
-        <span>💯 100% REAL INGREDIENTS<span class="dot">✦</span></span>
-      </div>
+      <span>🔥 FRESH OFF THE GRILL<span class="dot">✦</span></span>
+      <span>🍔 ORDER DIRECT. NO HIDDEN FEES<span class="dot">✦</span></span>
+      <span>⚡ SAVE 10% EVERY ORDER<span class="dot">✦</span></span>
+      <span>🌶️ LIMITED TIME SPECIALS<span class="dot">✦</span></span>
+      <span>🚀 HOT &amp; DELIVERED FAST<span class="dot">✦</span></span>
+      <span>💯 100% REAL INGREDIENTS<span class="dot">✦</span></span>
+      <!-- Duplicate for seamless loop -->
+      <span>🔥 FRESH OFF THE GRILL<span class="dot">✦</span></span>
+      <span>🍔 ORDER DIRECT. NO HIDDEN FEES<span class="dot">✦</span></span>
+      <span>⚡ SAVE 10% EVERY ORDER<span class="dot">✦</span></span>
+      <span>🌶️ LIMITED TIME SPECIALS<span class="dot">✦</span></span>
+      <span>🚀 HOT &amp; DELIVERED FAST<span class="dot">✦</span></span>
+      <span>💯 100% REAL INGREDIENTS<span class="dot">✦</span></span>
     </div>
   </div>
 </section>
