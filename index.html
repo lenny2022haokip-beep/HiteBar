@@ -743,42 +743,49 @@
   .whatsapp-btn:hover { background: transparent; color: #25D366; }
   .whatsapp-btn:active { transform: scale(0.97); }
 
-  /* ---------- Mobile & Tablet Responsive Media Queries ---------- */
-  @media (max-width: 640px) {
-    .header-inner { height: 56px; padding: 0 16px; }
+  /* ---------- Mobile & Tablet Native WebApp Styles ---------- */
+  @media (max-width: 768px) {
+    .header-inner { height: 50px; padding: 0 12px; }
+    .logo { font-size: 16px; }
     .hero-badge-wrap { display: none; }
-    .hero-text { padding: 76px 16px 20px; }
-    .glass-pill { padding: 6px 12px; margin-bottom: 16px; }
-    .glass-pill span.pill-text { font-size: 10px; letter-spacing: 0.12em; }
     
-    .hero-title { line-height: 1.05; margin: 0 0 14px; word-break: break-word; }
-    .hero-title span.l1 { font-size: clamp(1.8rem, 8.5vw, 3.2rem); -webkit-text-stroke: 1.5px var(--accent); }
-    .hero-title span.l2 { font-size: clamp(2.2rem, 10vw, 3.8rem); }
-    .hero-title span.l3 { font-size: clamp(1.6rem, 7.5vw, 2.8rem); }
-
-    .hero-desc { font-size: 13px; line-height: 1.5; margin-bottom: 20px; max-width: 100%; }
+    /* Compact WebApp Hero */
+    .hero-wrap { min-height: auto; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .hero-text { padding: 60px 12px 16px; }
+    .glass-pill { padding: 4px 10px; margin-bottom: 12px; }
+    .glass-pill span.pill-text { font-size: 9px; letter-spacing: 0.1em; }
     
-    .cta-group { width: 100%; gap: 10px; }
-    .cta-group .shimmer-btn { width: 100%; padding: 14px 16px; font-size: 12px; text-align: center; }
-    .cta-group .cta-sec { width: 100%; padding: 12px 16px; font-size: 11px; text-align: center; }
+    .hero-title { line-height: 1.02; margin: 0 0 10px; word-break: break-word; }
+    .hero-title span.l1 { font-size: clamp(1.4rem, 6.5vw, 2.4rem); -webkit-text-stroke: 1px var(--accent); }
+    .hero-title span.l2 { font-size: clamp(1.8rem, 8vw, 2.8rem); }
+    .hero-title span.l3 { font-size: clamp(1.3rem, 6vw, 2.1rem); }
 
+    .hero-desc { font-size: 11px; line-height: 1.45; margin-bottom: 16px; color: rgba(245,239,230,0.7); max-width: 100%; }
+    
+    .cta-group { width: 100%; gap: 8px; flex-direction: row; }
+    .cta-group .shimmer-btn { flex: 1; padding: 12px 10px; font-size: 11px; text-align: center; border-radius: 6px; }
+    .cta-group .cta-sec { display: none; }
+
+    /* Compact 3-Column Glass Stat Bar */
     .glass-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
+      gap: 4px;
       width: 100%;
-      margin-top: 24px;
+      margin-top: 14px;
     }
     .glass-stat-card {
       flex-direction: column;
       text-align: center;
       justify-content: center;
-      padding: 10px 4px;
+      padding: 6px 2px;
       min-width: 0;
+      border: 1px solid rgba(255,107,0,0.2);
+      background: rgba(0,0,0,0.6);
     }
-    .glass-stat-card .icon { font-size: 16px; margin-bottom: 2px; }
-    .glass-stat-card .stat-val { font-size: 14px; font-weight: 800; white-space: nowrap; }
-    .glass-stat-card .stat-lbl { font-size: 8px; font-weight: 700; letter-spacing: 0.05em; line-height: 1.2; text-align: center; }
+    .glass-stat-card .icon { font-size: 14px; margin-bottom: 0px; }
+    .glass-stat-card .stat-val { font-size: 12px; font-weight: 800; white-space: nowrap; }
+    .glass-stat-card .stat-lbl { font-size: 7.5px; font-weight: 700; letter-spacing: 0.02em; line-height: 1.1; text-align: center; color: rgba(245,239,230,0.5); }
 
     /* Showcase mobile stacked layout */
     .showcase-sec { background: #0c0c0c; }
@@ -791,69 +798,169 @@
     }
     .showcase-banner img {
       position: relative;
-      height: 200px;
+      height: 140px;
       width: 100%;
       object-fit: cover;
       object-position: center;
-      transform: none;
     }
     .showcase-gradient-r, .showcase-gradient-t { display: none; }
     .showcase-content {
       position: relative;
       inset: auto;
-      padding: 24px 16px;
+      padding: 16px 12px;
       background: #111111;
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .showcase-textbox { max-width: 100%; text-align: left; }
-    .showcase-textbox span.sub { font-size: 9px; margin-bottom: 8px; }
-    .showcase-textbox h2 { font-size: 22px; line-height: 1.1; margin: 0 0 10px; }
-    .showcase-textbox p { font-size: 13px; line-height: 1.55; margin-bottom: 16px; }
-    .showcase-textbox .line-decor { justify-content: flex-start; flex-wrap: wrap; gap: 8px; }
-    .showcase-textbox .line-decor .line { width: 32px; }
-    .showcase-textbox .line-decor span { font-size: 9px; letter-spacing: 0.15em; }
+    .showcase-textbox span.sub { font-size: 8.5px; margin-bottom: 4px; letter-spacing: 0.2em; }
+    .showcase-textbox h2 { font-size: 18px; line-height: 1.1; margin: 0 0 6px; }
+    .showcase-textbox p { font-size: 11px; line-height: 1.45; margin-bottom: 10px; }
+    .showcase-textbox .line-decor { display: none; }
 
-    .showcase-stats-grid .stat-item { padding: 14px 4px; }
-    .showcase-stats-grid .stat-item .num { font-size: 1.2rem; }
-    .showcase-stats-grid .stat-item .lbl { font-size: 8px; letter-spacing: 0.05em; }
+    .showcase-stats-grid .stat-item { padding: 10px 2px; }
+    .showcase-stats-grid .stat-item .num { font-size: 1rem; }
+    .showcase-stats-grid .stat-item .lbl { font-size: 7.5px; letter-spacing: 0.02em; }
 
-    .why-section { padding: 36px 16px; }
-    .why-head { margin-bottom: 24px; }
-    .why-head h2 { font-size: 22px; }
-    .why-grid { gap: 14px; }
-    .why-card { padding: 18px 16px; }
-    .why-card h3 { font-size: 15px; margin-bottom: 6px; }
-    .why-card p { font-size: 13px; line-height: 1.5; }
+    .why-section { padding: 24px 12px; }
+    .why-head { margin-bottom: 16px; }
+    .why-head h2 { font-size: 18px; }
+    .why-grid { gap: 10px; }
+    .why-card { padding: 14px 12px; }
+    .why-card h3 { font-size: 13px; margin-bottom: 4px; }
+    .why-card p { font-size: 11px; line-height: 1.4; }
 
-    .menu-section { padding: 32px 16px 48px; }
-    .menu-section h2 { font-size: 22px; margin-bottom: 18px; }
+    /* Sticky Mobile WebApp Category Sub-Header */
+    .menu-section { padding: 20px 12px 60px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .menu-section h2 { font-size: 18px; margin-bottom: 12px; }
+    
     .tabs {
-      padding: 4px 16px;
-      margin: 0 -16px 20px;
+      position: sticky;
+      top: 50px;
+      z-index: 35;
+      background: rgba(14, 14, 14, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 2px solid rgba(255, 107, 0, 0.3);
+      padding: 8px 12px;
+      margin: 0 -12px 16px;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
-    .tab-btn { padding: 10px 16px; font-size: 11px; flex-shrink: 0; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      scroll-snap-align: start;
+      padding: 8px 14px;
+      font-size: 10.5px;
+      font-weight: 800;
+      border-radius: 9999px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.04);
+      color: rgba(245,239,230,0.7);
+    }
+    .tab-btn.active {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(255,107,0,0.4);
+    }
 
-    .item-grid { gap: 16px; }
-    .card-body { padding: 16px; }
-    .card-body h3 { font-size: 15px; }
-    .card-body .desc { font-size: 12px; margin-top: 6px; }
-    .card-footer { margin-top: 14px; gap: 8px; }
-    .price { font-size: 16px; }
-    .add-btn { padding: 10px 16px; font-size: 11px; }
+    /* 2-Column Mobile Card Grid */
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .menu-card {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #141414;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .card-art { aspect-ratio: 4/3; padding: 8px; }
+    .card-art .cat-label { top: 8px; left: 8px; font-size: 7.5px; padding: 2px 6px; border-radius: 4px; }
+    .card-art .item-name { font-size: 12px; }
+    
+    .card-body { padding: 10px 8px; }
+    .card-body h3 { font-size: 12px; line-height: 1.25; }
+    .card-body .desc {
+      font-size: 10px;
+      line-height: 1.35;
+      margin-top: 4px;
+      color: rgba(245,239,230,0.5);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .card-footer { margin-top: 10px; flex-direction: column; align-items: stretch; gap: 6px; }
+    .price { font-size: 13px; text-align: left; }
+    .price .approx { display: block; font-size: 8.5px; margin-left: 0; }
+    
+    .add-btn {
+      width: 100%;
+      padding: 7px 8px;
+      font-size: 10px;
+      text-align: center;
+      border-radius: 4px;
+      border-width: 1px;
+    }
+    .qty-stepper { width: 100%; justify-content: space-between; padding: 2px 6px; border-radius: 4px; }
+    .qty-stepper button { width: 26px; height: 26px; font-size: 14px; }
+    .qty-stepper span { font-size: 12px; }
 
     .drawer { width: 100%; max-width: 100%; border-left: none; }
-    .drawer-header { height: 56px; padding: 0 16px; }
-    .drawer-body { padding: 14px 16px; }
-    .cart-line { padding: 10px; gap: 8px; }
-    .cart-line .info p.name { font-size: 12px; }
-    .cart-line .info p.each { font-size: 11px; }
-    .cart-line .line-total { font-size: 13px; width: auto; }
-    .payment-selection { padding: 12px 0; margin-top: 12px; }
-    .payment-selection button.pay-btn { font-size: 12px; padding: 10px 6px; }
-    .whatsapp-btn { padding: 14px; font-size: 13px; }
-    .qty-stepper button { width: 34px; height: 34px; font-size: 18px; }
+    .drawer-header { height: 50px; padding: 0 12px; }
+    .drawer-body { padding: 12px; }
+    .cart-line { padding: 8px; gap: 6px; }
+    .cart-line .info p.name { font-size: 11px; }
+    .cart-line .info p.each { font-size: 10px; }
+    .cart-line .line-total { font-size: 12px; width: auto; }
+    .payment-selection { padding: 10px 0; margin-top: 8px; }
+    .payment-selection button.pay-btn { font-size: 11px; padding: 8px 4px; }
+    .whatsapp-btn { padding: 12px; font-size: 12px; }
   }
+
+  /* Floating Mobile WebApp Cart Bottom Bar */
+  .mobile-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 45;
+    background: #141414;
+    border-top: 2px solid var(--accent);
+    padding: 8px 12px;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
+  }
+  @media (max-width: 768px) {
+    .mobile-bottom-bar.show { display: flex; }
+  }
+  .mobile-bottom-bar .cart-info { display: flex; flex-direction: column; }
+  .mobile-bottom-bar .cart-info .count { font-size: 10px; color: rgba(245,239,230,0.6); text-transform: uppercase; font-weight: 700; }
+  .mobile-bottom-bar .cart-info .total { font-size: 16px; font-weight: 800; color: var(--accent); }
+  .mobile-bottom-bar .checkout-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 10px 18px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
 </style>
 </head>
 <body>
@@ -1097,6 +1204,17 @@
   </div>
 </aside>
 
+<!-- Floating Mobile WebApp Bottom Bar -->
+<div class="mobile-bottom-bar" id="mobile-bottom-bar">
+  <div class="cart-info">
+    <span class="count" id="mb-count">0 ITEMS</span>
+    <span class="total" id="mb-total">₹0</span>
+  </div>
+  <button class="checkout-btn" onclick="openCart()">
+    VIEW ORDER &rarr;
+  </button>
+</div>
+
 <script>
 const STORE_WHATSAPP = "919673483659";
 const MIN_ORDER_VALUE = 1200;
@@ -1320,6 +1438,19 @@ function renderCart() {
     }
   } else {
     if (errCartEl) errCartEl.style.display = "none";
+  }
+
+  // Update Mobile Floating Bottom Bar
+  const mobileBarEl = document.getElementById("mobile-bottom-bar");
+  const totalQty = items.reduce((s, i) => s + i.qty, 0);
+  if (mobileBarEl) {
+    if (totalQty > 0) {
+      mobileBarEl.classList.add("show");
+      document.getElementById("mb-count").textContent = `${totalQty} ITEM${totalQty > 1 ? 'S' : ''}`;
+      document.getElementById("mb-total").textContent = "₹" + formatINR(total);
+    } else {
+      mobileBarEl.classList.remove("show");
+    }
   }
 }
 
