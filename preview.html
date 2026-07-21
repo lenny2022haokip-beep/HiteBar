@@ -737,20 +737,42 @@
     width: 100%; margin-top: 12px; background: #25D366; color: #0B1A0F; border: 2px solid #25D366;
     font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; padding: 16px; border-radius: 0;
     display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; font-size: 14px;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    transition: all 0.15s;
-  }
   .whatsapp-btn:hover { background: transparent; color: #25D366; }
-  .whatsapp-btn:active { transform: scale(0.97); } }
+  .whatsapp-btn:active { transform: scale(0.97); }
+
+  /* ---------- Mobile & Tablet Responsive Media Queries ---------- */
+  @media (max-width: 640px) {
+    .header-inner { height: 56px; padding: 0 16px; }
+    .hero-badge-wrap { display: none; }
+    .hero-text { padding: 84px 16px 24px; }
+    .hero-desc { font-size: 13px; margin-bottom: 24px; }
+    .cta-group .shimmer-btn { width: 100%; padding: 14px 20px; font-size: 13px; text-align: center; }
+    .cta-group .cta-sec { width: 100%; padding: 14px 20px; font-size: 12px; text-align: center; }
+    .glass-stats { gap: 8px; width: 100%; }
+    .glass-stat-card { flex: 1 1 calc(50% - 6px); padding: 10px 12px; min-width: 0; }
+    .glass-stat-card .stat-val { font-size: 16px; }
+    .glass-stat-card .stat-lbl { font-size: 8px; }
+    .showcase-banner { min-height: 360px; }
+    .showcase-textbox { max-width: 100%; text-align: center; }
+    .showcase-textbox .line-decor { justify-content: center; }
+    .showcase-stats-grid .stat-item { padding: 16px 6px; }
+    .showcase-stats-grid .stat-item .num { font-size: 1.4rem; }
+    .showcase-stats-grid .stat-item .lbl { font-size: 8px; letter-spacing: 0.1em; }
+    .why-section { padding: 40px 16px; }
+    .menu-section { padding: 36px 16px 48px; }
+    .tab-btn { padding: 10px 16px; font-size: 11px; }
+    .drawer { width: 100%; max-width: 100%; }
+    .qty-stepper button { width: 34px; height: 34px; font-size: 18px; }
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <span class="logo font-display">BURGER<span>BITE</span></span>
+    <span class="logo font-display">HITE<span>BAR</span></span>
     <nav class="desktop-nav">
-      <button onclick="scrollToMenu()">MENU</button>
+      <button onclick="scrollToMenu()">CATERING MENU</button>
       <a href="#why-direct">WHY ORDER DIRECT</a>
     </nav>
     <button class="cart-btn" onclick="openCart()" aria-label="Open cart">

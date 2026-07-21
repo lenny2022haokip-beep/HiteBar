@@ -1,5 +1,6 @@
 export const STORE_WHATSAPP = "919673483659";
 export const MIN_ORDER_VALUE = 1200;
+export const DELIVERY_FEE = 0;
 export const FREE_DELIVERY_RADIUS = "10km from Kausar Baug, Kondhwa, Pune";
 
 export const menuData = [
